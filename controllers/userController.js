@@ -1,7 +1,7 @@
-const bcryptjs = require("bcryptjs");
+// const bcryptjs = require("bcryptjs");
 const { ctrlWrapper } = require("../helpers");
 
-const getCurrent = (req, res) => {}; // toObject
+const getCurrent = (req, res) => {}; // req.user toObject
 const updateUserInfo = async (req, res) => {};
 const updateAvatarUser = async (req, res) => {};
 
