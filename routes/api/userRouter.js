@@ -11,6 +11,8 @@ userRouter.get("/current", getCurrent);
 
 userRouter.patch("/", updateUserInfo);
 
-userRouter.patch("/avatars", updateAvatarUser);
+userRouter.patch("/avatar", updateAvatarUser);
+
+// router.post('/user', authenticate, upload.single('avatar'), ctrl.addAvatar);
 
 module.exports = userRouter;
