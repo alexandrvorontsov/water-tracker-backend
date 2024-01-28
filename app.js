@@ -2,8 +2,8 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 const multer = require("multer");
-// const swaggerUi = require("swagger-ui-express");
-// const swaggerDocument = require("./swagger.json");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 require("dotenv").config();
 
 const authRouter = require("./routes/api/authRouter");
@@ -25,7 +25,7 @@ app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
 
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); написати фаїл swagger.json
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((err, req, res, next) => {
   const {
