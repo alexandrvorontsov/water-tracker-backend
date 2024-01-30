@@ -31,7 +31,7 @@ const userSchema = new Schema(
 
     signin: Boolean,
     token: { type: String },
-    avatarURL: { type: String, required: true },
+    avatarURL: { type: String },
     lockedTokens: [{ token: String, dateLock: Date }],
   },
   { versionKey: false, timestamps: true }
