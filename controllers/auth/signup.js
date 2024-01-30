@@ -35,6 +35,7 @@ const { JWT_SECRET } = process.env;
 
 const signup = async (req, res, next) => {
   const { password, email } = req.body;
+
   req.body.password = await bcrypt.hash(password, 10);
 
   const {

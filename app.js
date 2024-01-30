@@ -7,7 +7,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 
 const authRouter = require("./routes/api/authRouter");
-// const userRouter = require("./routes/api/usersRouter");
+const userRouter = require("./routes/api/usersRouter");
 // const contactsRouter = require("./routes/api/contacts");
 
 // const authRouter = require("./routes/api/authRouter");
@@ -30,7 +30,7 @@ app.use("/auth", authRouter);
 // app.use("/contacts", contactsRouter);
 
 // app.use("/auth", );
-// app.use("/users", );
+app.use("/users", userRouter);
 app.use("/water-rate", waterRateRouter);
 // app.use("/water", );
 // app.use("/today", );
