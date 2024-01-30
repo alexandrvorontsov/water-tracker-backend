@@ -55,15 +55,10 @@ const joiSigninSchema = Joi.object({
   gender: Joi.string().valid("male", "female"),
 });
 
-const userSchemaWaterRate = Joi.object({
-  waterRate: Joi.number().min(1).max(15000).required(),
-});
-
 const User = model("user", userSchema);
 
 module.exports = {
   User,
   joiSignupSchema,
   joiSigninSchema,
-  userSchemaWaterRate,
 };

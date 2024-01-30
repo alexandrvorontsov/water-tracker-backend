@@ -13,11 +13,11 @@ const router = express.Router();
 
 router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrent));
 
-router.post("/signup", validateBody(joiSignupSchema), ctrlWrapper(ctrl.signup));
+// router.post("/signup", validateBody(joiSignupSchema), ctrlWrapper(ctrl.signup));
 
-router.post("/signin", validateBody(joiSigninSchema), ctrlWrapper(ctrl.signin));
+// router.post("/signin", validateBody(joiSigninSchema), ctrlWrapper(ctrl.signin));
 
-router.post("/signout", authenticate, ctrlWrapper(ctrl.signout));
+// router.post("/signout", authenticate, ctrlWrapper(ctrl.signout));
 
 // router.patch("/:id", auth, ctrl.updateSubscription);
 

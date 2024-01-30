@@ -12,7 +12,7 @@ const authRouter = require("./routes/api/authRouter");
 
 // const authRouter = require("./routes/api/authRouter");
 // const userRouter = require("./routes/api/userRouter");
-// const waterRateRouter = require("./routes/api/waterRouter");
+const waterRateRouter = require("./routes/api/waterRateRouter");
 // const waterRouter = require("./routes/api/waterRouter");
 // const todayWaterRouter = require("./routes/api/waterRouter");
 // const monthWaterRouter = require("./routes/api/waterRouter");
@@ -31,7 +31,7 @@ app.use("/auth", authRouter);
 
 // app.use("/auth", );
 // app.use("/users", );
-// app.use("/water-rate", );
+app.use("/water-rate", waterRateRouter);
 // app.use("/water", );
 // app.use("/today", );
 // app.use("/month", );
