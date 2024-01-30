@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const gravatar = require("gravatar");
 // const jwt = require("jsonwebtoken");
 
-const { User } = require("../../models");
+const { User } = require("../../models/users");
 // const { JWT_SECRET } = process.env;
 
 const signup = async (req, res) => {
@@ -18,11 +18,18 @@ const signup = async (req, res) => {
   const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   req.body.signin = true;
 
-  await User.create({ userName, email, password: hashPassword, avatarURL });
+  await User.create({
+    userName,
+    email,
+    password: hashPassword,
+    avatarURL,
+    gender,
+    waterRate,
+  });
 
   res.status(201).json({
     message: "New user has been created!",
-    user: { email, userName, gender, waterRate, avatarURL },
+    user: { email, userName, waterRate, gender, avatarURL },
   });
 };
 

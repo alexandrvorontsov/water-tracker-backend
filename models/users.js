@@ -19,12 +19,14 @@ const userSchema = new Schema(
       type: String,
       enum: ["male", "female"],
       default: "male",
+      required: true,
     },
     waterRate: {
       type: Number,
       min: 1,
       max: 15000,
       default: 1500,
+      required: true,
     },
 
     signin: Boolean,

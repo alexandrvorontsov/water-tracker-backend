@@ -1,7 +1,7 @@
 const { Unauthorized } = require("http-errors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const { User } = require("../../models");
+const { User } = require("../../models/users");
 const { JWT_SECRET } = process.env;
 
 const signin = async (req, res) => {
