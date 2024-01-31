@@ -102,10 +102,11 @@
     "/auth/signout": {
       "post": {
         "tags": ["Auth"],
-        "summary": "User logaut",
+        "summary": "User logout",
         "security": [{ "Bearer": [] }],
         "responses": {
-          "200": {
+          
+          "204": {
             "description": "Successful operation",
             "content": {
               "application/json": {
@@ -119,33 +120,6 @@
                     }
                   },
                   "example": { "message": "Signout successful" }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request (invalid request body)",
-            "content": {}
-          },
-          "401": {
-            "description": " Not authorized",
-            "content": {}
-          }
-        }
-      }
-    },
-    "/auth/refresh": {
-      "get": {
-        "tags": ["Auth"],
-        "summary": "User refresh",
-        "security": [{ "Bearer": [] }],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AuthenticationResponse"
                 }
               }
             }
@@ -186,7 +160,9 @@
             "content": {}
           }
         }
-      },
+      }
+    },
+    "/users":{
       "patch": {
         "tags": ["Users"],
         "summary": "Update user's information",
@@ -281,27 +257,27 @@
         }
       }
     },
-    "/users/waterrate": {
+    "/water-rate": {
       "patch": {
-        "tags": ["Users"],
-        "summary": "Update user's water norma",
+        "tags": ["Water"],
+        "summary": "Update user's water rate",
         "security": [{ "Bearer": [] }],
         "requestBody": {
-          "description": "Water norma",
+          "description": "Water rate",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "waterNorma": {
+                  "waterRate": {
                     "type": "number",
-                    "description": "User water norma",
+                    "description": "User water rate",
                     "example": 2000
                   }
                 },
                 "example": {
-                  "waterNorma": 2000
+                  "waterRate": 2000
                 }
               }
             }
@@ -315,14 +291,14 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "waterNorma": {
+                    "waterRate": {
                       "type": "number",
-                      "description": "User water norma",
+                      "description": "User water rate",
                       "example": 2000
                     }
                   },
                   "example": {
-                    "waterNorma": 2000
+                    "waterRate": 2000
                   }
                 }
               }
@@ -344,7 +320,7 @@
     "schemas": {
       "RegistrationRequest": {
         "type": "object",
-        "required": ["email", "password", "date"],
+        "required": ["email", "password"],
         "properties": {
           "email": {
             "type": "string",
@@ -354,38 +330,57 @@
           "password": {
             "type": "string",
             "description": "User's password",
-            "example": "12345678"
-          },
-          "date": {
-            "type": "string",
-            "description": "Registration date",
-            "example": "2024-01-30"
+            "example": "1234567890"
           }
         }
       },
       "RegistrationResponse": {
         "type": "object",
         "properties": {
+          "token": {
+            "type": "string",
+            "description": "Access token",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTQwNywiZXhwIjoxNzA2NTQyMjA3fQ.s0M50RpudKPoL25S_xJpMZJez9dgaRdUTdpD6wqmmTo"
+          },
           "email": {
             "type": "string",
             "description": "User's email",
             "format": "email"
           },
+          "userName": {
+            "type": "string",
+            "description": "User's name",
+            "example": "User"
+          },
+          "avatarURL": {
+            "type": "string",
+            "description": "Avatar URL",
+            "example": "http://cloudy.com/avatar/taras.png"
+          },
+          "gender": {
+            "type": "string",
+            "description": "User's gender",
+            "example": "female"
+          },
+          "waterRate": {
+            "type": "number",
+            "description": "User water norma",
+            "example": 2000
+          },
           "date": {
             "type": "string",
             "description": "Registration date",
             "example": "2024-01-30"
-          },
-          "token": {
-            "type": "string",
-            "description": "Access token",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Yjk1NGM3MWYzZTc3OGIwN2ZjMmY2MSIsImlhdCI6MTcwNjY0NTAxNCwiZXhwIjoxNzA2NzI3ODE0fQ.T2hWqVfkd1iYRgPZ1fRqImq78BuukizB6wXMN0kqOM4"
           }
         },
         "example": {
-          "email": "testuser@ukr.net",
-          "date": "2024-01-30",
-          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Yjk1NGM3MWYzZTc3OGIwN2ZjMmY2MSIsImlhdCI6MTcwNjY0NTAxNCwiZXhwIjoxNzA2NzI3ODE0fQ.T2hWqVfkd1iYRgPZ1fRqImq78BuukizB6wXMN0kqOM4"
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTQwNywiZXhwIjoxNzA2NTQyMjA3fQ.s0M50RpudKPoL25S_xJpMZJez9dgaRdUTdpD6wqmmTo",
+          "email": "testuser@mail.com",
+          "userName": "",
+          "avatarURL": "",
+          "gender": "female",
+          "waterRate": 2000,
+          "date": "2024-01-30"
         }
       },
       "AuthenticationRequest": {
@@ -400,34 +395,24 @@
           "password": {
             "type": "string",
             "description": "User's password",
-            "example": "12345678"
+            "example": "1234567890"
           }
         }
       },
       "AuthenticationResponse": {
         "type": "object",
         "properties": {
+          "token": {
+            "type": "string",
+            "description": "Access token",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTQwNywiZXhwIjoxNzA2NTQyMjA3fQ.s0M50RpudKPoL25S_xJpMZJez9dgaRdUTdpD6wqmmTo"
+          },
           "email": {
             "type": "string",
             "description": "User's email",
             "format": "email"
           },
-          "date": {
-            "type": "string",
-            "description": "Registration date",
-            "example": "2024-01-30"
-          },
-          "token": {
-            "type": "string",
-            "description": "Access token",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Yjk1NGM3MWYzZTc3OGIwN2ZjMmY2MSIsImlhdCI6MTcwNjY0NTAxNCwiZXhwIjoxNzA2NzI3ODE0fQ.T2hWqVfkd1iYRgPZ1fRqImq78BuukizB6wXMN0kqOM4"
-          },
-          "waterNorma": {
-            "type": "string",
-            "description": "User water norma",
-            "example": "2000"
-          },
-          "username": {
+          "userName": {
             "type": "string",
             "description": "User's name",
             "example": "User"
@@ -440,17 +425,27 @@
           "gender": {
             "type": "string",
             "description": "User's gender",
-            "example": "man"
+            "example": "female"
+          },
+          "waterRate": {
+            "type": "number",
+            "description": "User water norma",
+            "example": 2000
+          },
+          "date": {
+            "type": "string",
+            "description": "Registration date",
+            "example": "2024-01-30"
           }
         },
         "example": {
-          "email": "testuser@ukr.net",
-          "date": "2024-01-30",
-          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Yjk1NGM3MWYzZTc3OGIwN2ZjMmY2MSIsImlhdCI6MTcwNjY0NTAxNCwiZXhwIjoxNzA2NzI3ODE0fQ.T2hWqVfkd1iYRgPZ1fRqImq78BuukizB6wXMN0kqOM4",
-          "username": "User",
-          "waterNorma": "2000",
-          "avatarURL": "http://cloudy.com/avatar/taras.png",
-          "gender": "man"
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTQwNywiZXhwIjoxNzA2NTQyMjA3fQ.s0M50RpudKPoL25S_xJpMZJez9dgaRdUTdpD6wqmmTo",
+          "email": "testuser@mail.com",
+          "userName": "",
+          "avatarURL": "",
+          "gender": "female",
+          "waterRate": 2000,
+          "date": "2024-01-30"
         }
       },
       "UpdateUserInfoRequest": {
@@ -464,12 +459,12 @@
           "password": {
             "type": "string",
             "description": "User's password",
-            "example": "12345678"
+            "example": "1234567890"
           },
           "newPassword": {
             "type": "number",
             "description": "New user's password",
-            "example": "12345678"
+            "example": "1234567890test"
           },
           "username": {
             "type": "string",
@@ -479,15 +474,16 @@
           "gender": {
             "type": "string",
             "description": "User's gender",
-            "example": "man"
+            "example": "female"
           }
         },
         "example": {
-          "email": "testuser@ukr.net",
-          "username": "User",
-          "gender": "man",
-          "password": "12345678",
-          "newPassword": "87654321"
+          "email": "testuser@mail.com",
+          "avatarURL": "",
+          "userName": "",
+          "gender": "female",
+          "password": "1234567890",
+          "newPassword": "1234567890test"
         }
       },
       "UserInfoResponse": {
@@ -498,17 +494,7 @@
             "description": "User's email",
             "format": "email"
           },
-          "date": {
-            "type": "string",
-            "description": "Registration date",
-            "example": "2024-01-30"
-          },
-          "waterNorma": {
-            "type": "number",
-            "description": "User water norma",
-            "example": 2000
-          },
-          "username": {
+          "userName": {
             "type": "string",
             "description": "User's name",
             "example": "User"
@@ -521,16 +507,27 @@
           "gender": {
             "type": "string",
             "description": "User's gender",
-            "example": "man"
+            "example": "female"
+          },
+          "waterRate": {
+            "type": "number",
+            "description": "User water norma",
+            "example": 2000
+          },
+          "date": {
+            "type": "string",
+            "description": "Registration date",
+            "example": "2024-01-30"
           }
         },
         "example": {
-          "email": "testuser@ukr.net",
-          "date": "2024-01-30",
-          "username": "User",
-          "waterNorma": 2000,
-          "avatarURL": "http://cloudy.com/avatar/taras.png",
-          "gender": "man"
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTQwNywiZXhwIjoxNzA2NTQyMjA3fQ.s0M50RpudKPoL25S_xJpMZJez9dgaRdUTdpD6wqmmTo",
+          "email": "testuser@mail.com",
+          "userName": "",
+          "avatarURL": "",
+          "gender": "female",
+          "waterRate": 2000,
+          "date": "2024-01-30"
         }
       }
     },
