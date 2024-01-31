@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.use("/auth", authRouter);
-// app.use("/users", );
+// app.use("/users", userRouter);
 app.use("/water-rate", waterRateRouter);
 app.use("/water", waterRouter);
 app.use("/today", todayWaterRouter);

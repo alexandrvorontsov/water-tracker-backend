@@ -276,6 +276,7 @@
           "401": {
             "description": " Not authorized",
             "content": {}
+<<<<<<< HEAD
           }
         }
       }
@@ -533,6 +534,265 @@
         }
       }
     },
+=======
+          }
+        }
+      }
+    },
+    "/users/waterrate": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Update user's water norma",
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Water norma",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "waterNorma": {
+                    "type": "number",
+                    "description": "User water norma",
+                    "example": 2000
+                  }
+                },
+                "example": {
+                  "waterNorma": 2000
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "waterNorma": {
+                      "type": "number",
+                      "description": "User water norma",
+                      "example": 2000
+                    }
+                  },
+                  "example": {
+                    "waterNorma": 2000
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": " Not authorized",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegistrationRequest": {
+        "type": "object",
+        "required": ["email", "password", "date"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "12345678"
+          },
+          "date": {
+            "type": "string",
+            "description": "Registration date",
+            "example": "2024-01-30"
+          }
+        }
+      },
+      "RegistrationResponse": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "date": {
+            "type": "string",
+            "description": "Registration date",
+            "example": "2024-01-30"
+          },
+          "token": {
+            "type": "string",
+            "description": "Access token",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Yjk1NGM3MWYzZTc3OGIwN2ZjMmY2MSIsImlhdCI6MTcwNjY0NTAxNCwiZXhwIjoxNzA2NzI3ODE0fQ.T2hWqVfkd1iYRgPZ1fRqImq78BuukizB6wXMN0kqOM4"
+          }
+        },
+        "example": {
+          "email": "testuser@ukr.net",
+          "date": "2024-01-30",
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Yjk1NGM3MWYzZTc3OGIwN2ZjMmY2MSIsImlhdCI6MTcwNjY0NTAxNCwiZXhwIjoxNzA2NzI3ODE0fQ.T2hWqVfkd1iYRgPZ1fRqImq78BuukizB6wXMN0kqOM4"
+        }
+      },
+      "AuthenticationRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "12345678"
+          }
+        }
+      },
+      "AuthenticationResponse": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "date": {
+            "type": "string",
+            "description": "Registration date",
+            "example": "2024-01-30"
+          },
+          "token": {
+            "type": "string",
+            "description": "Access token",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Yjk1NGM3MWYzZTc3OGIwN2ZjMmY2MSIsImlhdCI6MTcwNjY0NTAxNCwiZXhwIjoxNzA2NzI3ODE0fQ.T2hWqVfkd1iYRgPZ1fRqImq78BuukizB6wXMN0kqOM4"
+          },
+          "waterNorma": {
+            "type": "string",
+            "description": "User water norma",
+            "example": "2000"
+          },
+          "username": {
+            "type": "string",
+            "description": "User's name",
+            "example": "User"
+          },
+          "avatarURL": {
+            "type": "string",
+            "description": "Avatar URL",
+            "example": "http://cloudy.com/avatar/taras.png"
+          },
+          "gender": {
+            "type": "string",
+            "description": "User's gender",
+            "example": "man"
+          }
+        },
+        "example": {
+          "email": "testuser@ukr.net",
+          "date": "2024-01-30",
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Yjk1NGM3MWYzZTc3OGIwN2ZjMmY2MSIsImlhdCI6MTcwNjY0NTAxNCwiZXhwIjoxNzA2NzI3ODE0fQ.T2hWqVfkd1iYRgPZ1fRqImq78BuukizB6wXMN0kqOM4",
+          "username": "User",
+          "waterNorma": "2000",
+          "avatarURL": "http://cloudy.com/avatar/taras.png",
+          "gender": "man"
+        }
+      },
+      "UpdateUserInfoRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "12345678"
+          },
+          "newPassword": {
+            "type": "number",
+            "description": "New user's password",
+            "example": "12345678"
+          },
+          "username": {
+            "type": "string",
+            "description": "User's name",
+            "example": "User"
+          },
+          "gender": {
+            "type": "string",
+            "description": "User's gender",
+            "example": "man"
+          }
+        },
+        "example": {
+          "email": "testuser@ukr.net",
+          "username": "User",
+          "gender": "man",
+          "password": "12345678",
+          "newPassword": "87654321"
+        }
+      },
+      "UserInfoResponse": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "date": {
+            "type": "string",
+            "description": "Registration date",
+            "example": "2024-01-30"
+          },
+          "waterNorma": {
+            "type": "number",
+            "description": "User water norma",
+            "example": 2000
+          },
+          "username": {
+            "type": "string",
+            "description": "User's name",
+            "example": "User"
+          },
+          "avatarURL": {
+            "type": "string",
+            "description": "Avatar URL",
+            "example": "http://cloudy.com/avatar/taras.png"
+          },
+          "gender": {
+            "type": "string",
+            "description": "User's gender",
+            "example": "man"
+          }
+        },
+        "example": {
+          "email": "testuser@ukr.net",
+          "date": "2024-01-30",
+          "username": "User",
+          "waterNorma": 2000,
+          "avatarURL": "http://cloudy.com/avatar/taras.png",
+          "gender": "man"
+        }
+      }
+    },
+>>>>>>> a39ab9c3a3fea92bf5d2b9dd808615a948f31f99
     "securitySchemes": {
       "Bearer": {
         "type": "http",
@@ -541,4 +801,8 @@
       }
     }
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a39ab9c3a3fea92bf5d2b9dd808615a948f31f99
