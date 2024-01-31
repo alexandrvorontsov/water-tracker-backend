@@ -1,0 +1,257 @@
+
+
+
+
+-------------------------------------------------------------------------
+SWAGGER 
+
+
+POST
+/auth/signup
+
+{
+  "email": "test@mail.com",
+  "password": "1234567890"
+}
+RESPONSE=> 201
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTQwNywiZXhwIjoxNzA2NTQyMjA3fQ.s0M50RpudKPoL25S_xJpMZJez9dgaRdUTdpD6wqmmTo",
+    "user": {
+        "email": "test@mail.com",
+        "userName": "",
+        "avatarURL": "",
+        "gender": "female",
+        "waterRate": 2000
+    }
+}
+
+
+
+
+------------------------------------------
+POST
+/auth/signin
+
+{
+  "email": "test@mail.com",
+  "password": "1234567890"
+}
+RESPONSE=> 200
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTY2OSwiZXhwIjoxNzA2NTQyNDY5fQ.FQ9Yhl_x2mMKHf0VxKCo8U_WZ0twYyXk2x-Me5ccpfg",
+    "user": {
+        "email": "test@mail.com",
+        "userName": "",
+        "avatarURL": "",
+        "gender": "female",
+        "waterRate": 2000
+    }
+}
+
+
+
+-------------------------------------------------
+POST
+/auth/signout/
+
+Authorization
+Bearer Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ2MDAxNSwiZXhwIjoxNzA2NTQyODE1fQ.P1nNDq_fEfzEbSwoQXO2JP049QIDzT13Ts9tzwAIcPY
+
+
+RESPONSES 204
+
+{token: lockedToken, dateLock: new Date()}
+
+
+-------------------------------------------
+
+GET 
+/users/current/
+
+Authorization
+Bearer Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ2MDAxNSwiZXhwIjoxNzA2NTQyODE1fQ.P1nNDq_fEfzEbSwoQXO2JP049QIDzT13Ts9tzwAIcPY
+
+RESPONSE=> 200
+{
+    "email": "test@mail.com",
+    "avatarURL": "",
+    "userName": "",
+    "gender": "female",
+    "waterRate": 2000
+}
+
+-------------------------------------------
+
+PATCH  'Update user profile'
+/users/
+
+Authorization
+Bearer Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ2MDAxNSwiZXhwIjoxNzA2NTQyODE1fQ.P1nNDq_fEfzEbSwoQXO2JP049QIDzT13Ts9tzwAIcPY
+
+RESPONSE=> 200
+{
+    "email": "test@mail.com",
+    "avatarURL": "",
+    "userName": "",
+    "gender": "female",
+    "password": "1234567890test"
+}
+
+--------------------------------------------------
+PACTH 
+/water-rate
+
+Authorization
+Bearer Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ2MDAxNSwiZXhwIjoxNzA2NTQyODE1fQ.P1nNDq_fEfzEbSwoQXO2JP049QIDzT13Ts9tzwAIcPY
+
+{
+  "waterRate": 1500
+}
+RESPONSE=> 200
+{
+    "waterRate": 1500
+}
+
+
+
+----------------------------------------------------------
+POST 
+/water/
+
+Authorization
+Bearer Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ2MDAxNSwiZXhwIjoxNzA2NTQyODE1fQ.P1nNDq_fEfzEbSwoQXO2JP049QIDzT13Ts9tzwAIcPY
+
+{
+  "waterValue": 500,
+  "date": "2024-01-28T17:00:00.000Z",
+}
+RESPONSE=> 201
+{
+    "_id": "65b685db7a4e87117023147e",
+    "waterValue": 500,
+    "date": "2024-01-28T17:00:00.000Z",
+    "owner": "65b6810f7a4e87117023146e"
+}
+
+{
+    "_id": "65b6861e7a4e871170231481",
+    "waterValue": 1500,
+    "date": "2024-01-28T18:00:00.000Z",
+    "owner": "65b6810f7a4e87117023146e"
+}
+
+
+
+-----------------------------------------------------
+DELETE по ID 
+/water/{id}
+
+65b687ef7a4e871170231484 -приклад {id}
+
+Authorization
+Bearer Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ2MDAxNSwiZXhwIjoxNzA2NTQyODE1fQ.P1nNDq_fEfzEbSwoQXO2JP049QIDzT13Ts9tzwAIcPY
+
+RESPONSE=> 201
+{
+    "message": "Delete success"
+}
+
+--------------------------------------------------
+
+
+PACTH 
+/water/{id}
+
+waterValue -change !!!
+
+65b685db7a4e87117023147e  -приклад {id}
+
+Authorization
+Bearer Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ2MDAxNSwiZXhwIjoxNzA2NTQyODE1fQ.P1nNDq_fEfzEbSwoQXO2JP049QIDzT13Ts9tzwAIcPY
+
+{
+    "waterValue": 500,
+    "date": "2024-01-28T17:00:00.000Z",
+}
+RESPONSE=> 201
+{
+    "_id": "65b6861e7a4e871170231481",
+    "waterValue": 500,  
+    "owner": "65b6810f7a4e87117023146e"
+    "date": "2024-01-28T18:00:00.000Z",
+}
+
+
+
+
+---------------------------------------------------------
+
+GET 
+/today/
+
+Authorization
+Bearer Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ2MDAxNSwiZXhwIjoxNzA2NTQyODE1fQ.P1nNDq_fEfzEbSwoQXO2JP049QIDzT13Ts9tzwAIcPY
+
+RESPONSE=> 200
+{
+    "waterInputToday": [
+        {
+            "_id": "65b685db7a4e87117023147e",
+            "waterValue": 500,
+            "date": "2024-01-28T17:00:00.000Z",
+            "owner": "65b6810f7a4e87117023146e"
+        },
+        {
+            "_id": "65b6861e7a4e871170231481",
+            "waterValue": 1500,
+            "date": "2024-01-28T18:00:00.000Z",
+            "owner": "65b6810f7a4e87117023146e"
+        },
+        {
+            "_id": "65b68a487a4e87117023148b",
+            "waterValue": 100,
+            "date": "2024-01-28T19:00:00.000Z",
+            "owner": "65b6810f7a4e87117023146e"
+        }
+    ],
+    "drinksTodayPercent": 140
+}
+
+
+
+
+
+
+----------------------------------------------
+GET 
+
+/month/{monthNumber}
+
+{1}- приклад
+
+Authorization
+Bearer Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ2MDAxNSwiZXhwIjoxNzA2NTQyODE1fQ.P1nNDq_fEfzEbSwoQXO2JP049QIDzT13Ts9tzwAIcPY 
+
+
+RESPONSE=> 200
+[
+    {
+        "data": "28, January",
+        "waterRate": 1.5,
+        "waterInputTodayPercent": 140,
+        "drinks": 3
+    }
+]
+
+
+
+
+
+
+
+
+
+
+
+
+

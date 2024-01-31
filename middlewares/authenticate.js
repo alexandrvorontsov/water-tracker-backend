@@ -17,6 +17,7 @@ const authenticate = async (req, res, next) => {
       throw new Unauthorized("Not authorized");
     }
     req.user = user;
+    req.filter = { portion: id };
     next();
   } catch (error) {
     if (error.message === "Invalid sugnature") {

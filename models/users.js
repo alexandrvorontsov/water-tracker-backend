@@ -25,7 +25,7 @@ const userSchema = new Schema(
       type: Number,
       min: 1,
       max: 15000,
-      default: 1500,
+      default: 2000,
       required: true,
     },
 
@@ -43,6 +43,8 @@ const userSchema = new Schema(
 //   password: Joi.string().min(6).required(),
 //   gender: Joi.string().valid("male", "female"),
 // });
+
+// JOI
 
 const joiSignupSchema = Joi.object({
   email: Joi.string().required(),
