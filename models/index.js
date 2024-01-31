@@ -1,4 +1,14 @@
-const { Contact } = require("./contact");
+// users
 const { User } = require("./users");
 const { joiWaterRateSchema } = require("./water");
-module.exports = { Contact, User, joiWaterRateSchema };
+
+// waterinput
+const { joiWaterAddSchema } = require("./water");
+const { WaterInput } = require("./water");
+
+module.exports = {
+  User,
+  joiWaterRateSchema,
+  joiWaterAddSchema,
+  WaterInput,
+};

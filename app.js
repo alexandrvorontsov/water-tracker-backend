@@ -7,15 +7,9 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 
 const authRouter = require("./routes/api/authRouter");
-const userRouter = require("./routes/api/usersRouter");
-// const contactsRouter = require("./routes/api/contacts");
-
-// const authRouter = require("./routes/api/authRouter");
-// const userRouter = require("./routes/api/userRouter");
 const waterRateRouter = require("./routes/api/waterRateRouter");
-// const waterRouter = require("./routes/api/waterRouter");
-// const todayWaterRouter = require("./routes/api/waterRouter");
-// const monthWaterRouter = require("./routes/api/waterRouter");
+const waterRouter = require("./routes/api/waterRouter");
+
 
 const app = express();
 
@@ -27,14 +21,10 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.use("/auth", authRouter);
-// app.use("/contacts", contactsRouter);
 
-// app.use("/auth", );
-app.use("/users", userRouter);
 app.use("/water-rate", waterRateRouter);
-// app.use("/water", );
-// app.use("/today", );
-// app.use("/month", );
+app.use("/water", waterRouter);
+
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res) => {

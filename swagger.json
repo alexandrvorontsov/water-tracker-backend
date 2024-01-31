@@ -1,7 +1,7 @@
 {
   "openapi" : "3.0.1",
   "info" : {
-    "version" : "1.0.3",
+    "version" : "2.0.3",
     "title" : "Watertracker API",
     "description" : "API documentation for project Watertracker"
   },
@@ -16,6 +16,9 @@
   }, {
     "name" : "Users",
     "description" : "User information endpoints"
+  }, {
+    "name" : "Water",
+    "description" : "Water information endpoints"
   } ],
   "paths" : {
     "/auth/signup" : {
@@ -95,12 +98,12 @@
     "/auth/signout" : {
       "post" : {
         "tags" : [ "Auth" ],
-        "summary" : "User logaut",
+        "summary" : "User logout",
         "security" : [ {
           "Bearer" : [ ]
         } ],
         "responses" : {
-          "200" : {
+          "204" : {
             "description" : "Successful operation",
             "content" : {
               "application/json" : {
@@ -130,13 +133,200 @@
           }
         }
       }
+    },
+    "/users/current" : {
+      "get" : {
+        "tags" : [ "Users" ],
+        "summary" : "User's information",
+        "security" : [ {
+          "Bearer" : [ ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UserInfoResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad request (invalid request body)",
+            "content" : { }
+          },
+          "401" : {
+            "description" : " Not authorized",
+            "content" : { }
+          }
+        }
+      }
+    },
+    "/users" : {
+      "patch" : {
+        "tags" : [ "Users" ],
+        "summary" : "Update user's information",
+        "security" : [ {
+          "Bearer" : [ ]
+        } ],
+        "requestBody" : {
+          "description" : "Update's object",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateUserInfoRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UserInfoResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad request (invalid request body)",
+            "content" : { }
+          },
+          "401" : {
+            "description" : " Not authorized",
+            "content" : { }
+          }
+        }
+      }
+    },
+    "/users/avatar" : {
+      "patch" : {
+        "tags" : [ "Users" ],
+        "summary" : "Update user's avatar",
+        "security" : [ {
+          "Bearer" : [ ]
+        } ],
+        "requestBody" : {
+          "description" : "Avatar image",
+          "required" : true,
+          "content" : {
+            "multipart/form-data" : {
+              "schema" : {
+                "required" : [ "avatar" ],
+                "type" : "object",
+                "properties" : {
+                  "avatar" : {
+                    "type" : "string",
+                    "format" : "binary",
+                    "description" : "User's avatar image"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "avatarURL" : {
+                      "type" : "string",
+                      "description" : "Avatar URL",
+                      "example" : "http://cloudy.com/avatar/taras.png"
+                    }
+                  },
+                  "example" : {
+                    "avatarURL" : "http://cloudy.com/avatar/taras.png"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad request (invalid request body)",
+            "content" : { }
+          },
+          "401" : {
+            "description" : " Not authorized",
+            "content" : { }
+          }
+        }
+      }
+    },
+    "/water-rate" : {
+      "patch" : {
+        "tags" : [ "Water" ],
+        "summary" : "Update user's water rate",
+        "security" : [ {
+          "Bearer" : [ ]
+        } ],
+        "requestBody" : {
+          "description" : "Water rate",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "waterRate" : {
+                    "type" : "number",
+                    "description" : "User water rate",
+                    "example" : 2000
+                  }
+                },
+                "example" : {
+                  "waterRate" : 2000
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "waterRate" : {
+                      "type" : "number",
+                      "description" : "User water rate",
+                      "example" : 2000
+                    }
+                  },
+                  "example" : {
+                    "waterRate" : 2000
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad request (invalid request body)",
+            "content" : { }
+          },
+          "401" : {
+            "description" : " Not authorized",
+            "content" : { }
+          }
+        }
+      }
     }
   },
   "components" : {
     "schemas" : {
       "RegistrationRequest" : {
         "type" : "object",
-        "required" : [ "email", "password", "date" ],
+        "required" : [ "email", "password" ],
         "properties" : {
           "email" : {
             "type" : "string",
@@ -146,68 +336,57 @@
           "password" : {
             "type" : "string",
             "description" : "User's password",
-            "example" : "12345678"
-          },
-          "date" : {
-            "type" : "string",
-            "description" : "Registration date",
-            "example" : "2024-01-01"
+            "example" : "1234567890"
           }
         }
       },
       "RegistrationResponse" : {
         "type" : "object",
         "properties" : {
+          "token" : {
+            "type" : "string",
+            "description" : "Access token",
+            "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTQwNywiZXhwIjoxNzA2NTQyMjA3fQ.s0M50RpudKPoL25S_xJpMZJez9dgaRdUTdpD6wqmmTo"
+          },
           "email" : {
             "type" : "string",
             "description" : "User's email",
             "format" : "email"
           },
+          "userName" : {
+            "type" : "string",
+            "description" : "User's name",
+            "example" : "User"
+          },
+          "avatarURL" : {
+            "type" : "string",
+            "description" : "Avatar URL",
+            "example" : "http://cloudy.com/avatar/taras.png"
+          },
+          "gender" : {
+            "type" : "string",
+            "description" : "User's gender",
+            "example" : "female"
+          },
+          "waterRate" : {
+            "type" : "number",
+            "description" : "User water norma",
+            "example" : 2000
+          },
           "date" : {
             "type" : "string",
             "description" : "Registration date",
-            "example" : "2024-01-01"
-          },
-          "token" : {
-            "type" : "string",
-            "description" : "Access token",
-            "example" : {
-  "_id": {
-    "$oid": "6656c89c30c5cb3cb2f88e8b1"
-  },
-  "password": "$2b$10$Dty.Tc6SysQ2jF38m8RZau670gYFSlEFfPjG8Z9ZB1IyryRjhdks",
-  "email": "vvv@gmail.com",
-  "subscription": "starter",
-  "avatarUrl": "//www.gravatar.com/avatar/23463b99b62a72f26ed677cc556c44e8",
-  "createdAt": {
-    "$date": "2023-12-03T13:59:31.089Z"
-  },
-  "updatedAt": {
-    "$date": "2023-12-03T14:08:39.134Z"
-  },
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NmM4OWMzMGM1Y2IzY2IyZjg4ZThiMSIsImlhdCI6MTcwMTYxMjMzOCwiZXhwIjoxNzAxNjk1MTM4fQ.1sZjPTZO4G4ardj63PmM-wMUxNeyBhbjOzDES5gxofU"
-}
+            "example" : "2024-01-30"
           }
         },
         "example" : {
-          "email" : "testuser@ukr.net",
-          "date" : "2024-01-01",
-          "token" : {
-  "_id": {
-    "$oid": "6656c89c30c5cb3cb2f88e8b1"
-  },
-  "password": "$2b$10$Dty.Tc6SysQ2jF38m8RZau670gYFSlEFfPjG8Z9ZB1IyryRjhdks",
-  "email": "vvv@gmail.com",
-  "subscription": "starter",
-  "avatarUrl": "//www.gravatar.com/avatar/23463b99b62a72f26ed677cc556c44e8",
-  "createdAt": {
-    "$date": "2023-12-03T13:59:31.089Z"
-  },
-  "updatedAt": {
-    "$date": "2023-12-03T14:08:39.134Z"
-  },
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NmM4OWMzMGM1Y2IzY2IyZjg4ZThiMSIsImlhdCI6MTcwMTYxMjMzOCwiZXhwIjoxNzAxNjk1MTM4fQ.1sZjPTZO4G4ardj63PmM-wMUxNeyBhbjOzDES5gxofU"
-}
+          "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTQwNywiZXhwIjoxNzA2NTQyMjA3fQ.s0M50RpudKPoL25S_xJpMZJez9dgaRdUTdpD6wqmmTo",
+          "email" : "testuser@mail.com",
+          "userName" : "",
+          "avatarURL" : "",
+          "gender" : "female",
+          "waterRate" : 2000,
+          "date" : "2024-01-30"
         }
       },
       "AuthenticationRequest" : {
@@ -222,49 +401,24 @@
           "password" : {
             "type" : "string",
             "description" : "User's password",
-            "example" : "12345678"
+            "example" : "1234567890"
           }
         }
       },
       "AuthenticationResponse" : {
         "type" : "object",
         "properties" : {
+          "token" : {
+            "type" : "string",
+            "description" : "Access token",
+            "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTQwNywiZXhwIjoxNzA2NTQyMjA3fQ.s0M50RpudKPoL25S_xJpMZJez9dgaRdUTdpD6wqmmTo"
+          },
           "email" : {
             "type" : "string",
             "description" : "User's email",
             "format" : "email"
           },
-          "date" : {
-            "type" : "string",
-            "description" : "Registration date",
-            "example" : "2024-01-01"
-          },
-          "token" : {
-            "type" : "string",
-            "description" : "Access token",
-            "example" : {
-  "_id": {
-    "$oid": "656c89c30c5cb3cb2f88e8b1"
-  },
-  "password": "$2b$10$Dty.Tc6SysQ2jF38m8RZau670gYFSlEFfPjG8Z9ZB1IyryRjhdks",
-  "email": "vvv@gmail.com",
-  "subscription": "starter",
-  "avatarUrl": "//www.gravatar.com/avatar/23463b99b62a72f26ed677cc556c44e8",
-  "createdAt": {
-    "$date": "2023-12-03T13:59:31.089Z"
-  },
-  "updatedAt": {
-    "$date": "2023-12-03T14:08:39.134Z"
-  },
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NmM4OWMzMGM1Y2IzY2IyZjg4ZThiMSIsImlhdCI6MTcwMTYxMjMzOCwiZXhwIjoxNzAxNjk1MTM4fQ.1sZjPTZO4G4ardj63PmM-wMUxNeyBhbjOzDES5gxofU"
-}
-          },
-          "waterNorma" : {
-            "type" : "string",
-            "description" : "User water norma",
-            "example" : "2000"
-          },
-          "username" : {
+          "userName" : {
             "type" : "string",
             "description" : "User's name",
             "example" : "User"
@@ -277,32 +431,109 @@
           "gender" : {
             "type" : "string",
             "description" : "User's gender",
-            "example" : "man"
+            "example" : "female"
+          },
+          "waterRate" : {
+            "type" : "number",
+            "description" : "User water norma",
+            "example" : 2000
+          },
+          "date" : {
+            "type" : "string",
+            "description" : "Registration date",
+            "example" : "2024-01-30"
           }
         },
         "example" : {
-          "email" : "testuser@ukr.net",
-          "date" : "2024-01-01",
-          "token" : {
-  "_id": {
-    "$oid": "656c89c30c5cb3cb2f88e8b1"
-  },
-  "password": "$2b$10$Dty.Tc6SysQ2jF38m8RZau670gYFSlEFfPjG8Z9ZB1IyryRjhdksO",
-  "email": "vvv@gmail.com",
-  "subscription": "starter",
-  "avatarUrl": "//www.gravatar.com/avatar/23463b99b62a72f26ed677cc556c44e8",
-  "createdAt": {
-    "$date": "2023-12-03T13:59:31.089Z"
-  },
-  "updatedAt": {
-    "$date": "2023-12-03T14:08:39.134Z"
-  },
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NmM4OWMzMGM1Y2IzY2IyZjg4ZThiMSIsImlhdCI6MTcwMTYxMjMzOCwiZXhwIjoxNzAxNjk1MTM4fQ.1sZjPTZO4G4ardj63PmM-wMUxNeyBhbjOzDES5gxofU"
-},
-          "username" : "User",
-          "waterNorma" : "2000",
-          "avatarURL" : "http://cloudy.com/avatar/taras.png",
-          "gender" : "man"
+          "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTQwNywiZXhwIjoxNzA2NTQyMjA3fQ.s0M50RpudKPoL25S_xJpMZJez9dgaRdUTdpD6wqmmTo",
+          "email" : "testuser@mail.com",
+          "userName" : "",
+          "avatarURL" : "",
+          "gender" : "female",
+          "waterRate" : 2000,
+          "date" : "2024-01-30"
+        }
+      },
+      "UpdateUserInfoRequest" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string",
+            "description" : "User's email",
+            "format" : "email"
+          },
+          "password" : {
+            "type" : "string",
+            "description" : "User's password",
+            "example" : "1234567890"
+          },
+          "newPassword" : {
+            "type" : "number",
+            "description" : "New user's password",
+            "example" : "1234567890test"
+          },
+          "username" : {
+            "type" : "string",
+            "description" : "User's name",
+            "example" : "User"
+          },
+          "gender" : {
+            "type" : "string",
+            "description" : "User's gender",
+            "example" : "female"
+          }
+        },
+        "example" : {
+          "email" : "testuser@mail.com",
+          "avatarURL" : "",
+          "userName" : "",
+          "gender" : "female",
+          "password" : "1234567890",
+          "newPassword" : "1234567890test"
+        }
+      },
+      "UserInfoResponse" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string",
+            "description" : "User's email",
+            "format" : "email"
+          },
+          "userName" : {
+            "type" : "string",
+            "description" : "User's name",
+            "example" : "User"
+          },
+          "avatarURL" : {
+            "type" : "string",
+            "description" : "Avatar URL",
+            "example" : "http://cloudy.com/avatar/taras.png"
+          },
+          "gender" : {
+            "type" : "string",
+            "description" : "User's gender",
+            "example" : "female"
+          },
+          "waterRate" : {
+            "type" : "number",
+            "description" : "User water norma",
+            "example" : 2000
+          },
+          "date" : {
+            "type" : "string",
+            "description" : "Registration date",
+            "example" : "2024-01-30"
+          }
+        },
+        "example" : {
+          "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTQwNywiZXhwIjoxNzA2NTQyMjA3fQ.s0M50RpudKPoL25S_xJpMZJez9dgaRdUTdpD6wqmmTo",
+          "email" : "testuser@mail.com",
+          "userName" : "",
+          "avatarURL" : "",
+          "gender" : "female",
+          "waterRate" : 2000,
+          "date" : "2024-01-30"
         }
       }
     },
@@ -315,4 +546,3 @@
     }
   }
 }
-
