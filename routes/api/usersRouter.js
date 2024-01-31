@@ -19,7 +19,7 @@ router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrent));
 
 // router.post("/signout", authenticate, ctrlWrapper(ctrl.signout));
 
-// router.patch("/:id", auth, ctrl.updateSubscription);
+router.patch("/:id", authenticate, ctrl.updateUserInfo);
 
 router.patch(
   "/avatars",
