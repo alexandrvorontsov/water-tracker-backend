@@ -7,17 +7,11 @@ const {
 } = require("../../middlewares");
 const { users: ctrl } = require("../../controllers");
 
-const { joiSignupSchema, joiSigninSchema } = require("../../models/users");
+// const { joiSignupSchema, joiSigninSchema } = require("../../models/users");
 
 const router = express.Router();
 
 router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrent));
-
-// router.post("/signup", validateBody(joiSignupSchema), ctrlWrapper(ctrl.signup));
-
-// router.post("/signin", validateBody(joiSigninSchema), ctrlWrapper(ctrl.signin));
-
-// router.post("/signout", authenticate, ctrlWrapper(ctrl.signout));
 
 router.patch("/", authenticate, ctrlWrapper(ctrl.updateUserInfo));
 
