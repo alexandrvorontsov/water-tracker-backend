@@ -14,7 +14,7 @@ const userSchema = new Schema(
       minlength: 8,
       maxlength: 64,
     },
-    name: { type: String, required: false, maxlength: 32 },
+    name: { type: String, default: "", required: false, maxlength: 32 },
     gender: {
       type: String,
       enum: ["male", "female"],
@@ -38,7 +38,7 @@ const userSchema = new Schema(
 );
 
 // const joiSignupSchema = Joi.object({
-//   userName: Joi.string().required(),
+//   user: Joi.string().required(),
 //   email: Joi.string().required(),
 //   password: Joi.string().min(6).required(),
 //   gender: Joi.string().valid("male", "female"),

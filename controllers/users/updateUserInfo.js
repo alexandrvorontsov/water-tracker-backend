@@ -4,7 +4,6 @@ const { User } = require("../../models");
 const updateUserInfo = async (req, res) => {
   const { email, name, gender } = req.body;
   const { _id } = req.user;
-
   const updatedUser = { email, name };
 
   if (gender) {

@@ -1,7 +1,7 @@
 const { WaterInput } = require("../../models");
 const { HttpError } = require("../../helpers");
 
-const updateWaterValueUsed = async (req, res) => {
+const updateWaterVolumeUsed = async (req, res) => {
   const {
     user: { _id: owner },
     params: { id },
@@ -20,4 +20,4 @@ const updateWaterValueUsed = async (req, res) => {
   res.status(201).json({ updatePortion });
 };
 
-module.exports = updateWaterValueUsed;
+module.exports = updateWaterVolumeUsed;

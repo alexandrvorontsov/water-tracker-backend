@@ -1,10 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
-const joiWaterRateSchema = Joi.object({
-  waterRate: Joi.number().min(1).max(15000).required(),
-});
-
 // waterinput
 const waterAddSchema = new Schema(
   {
@@ -13,7 +9,7 @@ const waterAddSchema = new Schema(
       ref: "user",
       required: true,
     },
-    waterValue: {
+    waterVolume: {
       type: Number,
       min: 1,
       max: 5000,
@@ -31,8 +27,13 @@ const waterAddSchema = new Schema(
 const WaterInput = model("waterInput", waterAddSchema);
 
 // Joi
+
+const joiWaterRateSchema = Joi.object({
+  waterRate: Joi.number().min(1).max(15000).required(),
+});
+
 const joiWaterAddSchema = Joi.object({
-  waterValue: Joi.number().min(1).max(5000).required(),
+  waterVolume: Joi.number().min(1).max(5000).required(),
   date: Joi.date().required(),
 });
 

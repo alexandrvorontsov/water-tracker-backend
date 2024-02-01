@@ -6,26 +6,6 @@ const { User } = require("../../models/users");
 const { HttpError } = require("../../helpers/HttpErrors");
 const { JWT_SECRET } = process.env;
 
-// const signin = async (req, res) => {
-//   const { email, password } = req.body;
-//   const user = await User.findOne({ email });
-//   if (!user) {
-//     throw new Unauthorized(`Email ${email} not found`);
-//   }
-//   const passCompare = bcrypt.compareSync(password, user.password);
-//   if (!passCompare) {
-//     throw new Unauthorized("Password wrong");
-//   }
-//   req.body.signin = true;
-//   const payload = { id: user._id };
-//   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
-//   await User.findByIdAndUpdate(user._id, { token });
-//   res.status(200).json({
-//     token,
-//     user: { email, userName, gender, waterRate, avatarURL },
-//   });
-// };
-
 const signin = async (req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -40,7 +20,7 @@ const signin = async (req, res, next) => {
   }
 
   const avatar = gravatar.url(email);
-  const { _id, userName = "", avatarURL = avatar, gender, waterRate } = user;
+  const { _id, name, avatarURL = avatar, gender, waterRate } = user;
   const payload = {
     id: _id,
   };
@@ -53,7 +33,7 @@ const signin = async (req, res, next) => {
     token,
     user: {
       email,
-      userName,
+      name,
       gender,
       waterRate,
       avatarURL,
