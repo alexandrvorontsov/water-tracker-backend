@@ -1,7 +1,7 @@
 const { WaterInput } = require("../../models");
 const { HttpError } = require("../../helpers");
 
-const delWaterValueUsed = async (req, res) => {
+const delWaterVolumeUsed = async (req, res) => {
   const {
     user: { _id: owner },
     params: { id },
@@ -17,4 +17,4 @@ const delWaterValueUsed = async (req, res) => {
   res.status(200).json({ message: "Delete success" });
 };
 
-module.exports = delWaterValueUsed;
+module.exports = delWaterVolumeUsed;

@@ -1,13 +1,13 @@
 const updateWaterRateUser = require("./updateWaterRateUser");
-const addWaterValueUsed = require("./addWaterValueUsed");
-const delWaterValueUsed = require("./delWaterValueUsed");
-const updateWaterValueUsed = require("./updateWaterValueUsed");
-const todayWaterValueUsed = require("./todayWaterValueUsed ");
+const addWaterVolumeUsed = require("./addWaterVolumeUsed");
+const delWaterVolumeUsed = require("./delWaterVolumeUsed");
+const updateWaterVolumeUsed = require("./updateWaterVolumeUsed");
+const todayWaterVolumeUsed = require("./todayWaterVolumeUsed ");
 
 module.exports = {
   updateWaterRateUser,
-  addWaterValueUsed,
-  delWaterValueUsed,
-  updateWaterValueUsed,
-  todayWaterValueUsed,
+  addWaterVolumeUsed,
+  delWaterVolumeUsed,
+  updateWaterVolumeUsed,
+  todayWaterVolumeUsed,
 };

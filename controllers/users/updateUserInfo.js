@@ -3,11 +3,11 @@ const { User } = require("../../models");
 
 const updateUserInfo = async (req, res) => {
   const { id } = req.params;
-  const { email, userName, gender } = req.body;
+  const { email, user, gender } = req.body;
 
   const updatedUser = await User.findByIdAndUpdate(
     id,
-    { email, userName, gender },
+    { email, user, gender },
     { new: true }
   );
 

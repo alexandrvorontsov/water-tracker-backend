@@ -14,13 +14,13 @@ router.post(
   "/",
   authenticate,
   validateBody(joiWaterAddSchema),
-  ctrlWrapper(ctrl.addWaterValueUsed)
+  ctrlWrapper(ctrl.addWaterVolumeUsed)
 );
 
-router.delete("/:id", authenticate, ctrlWrapper(ctrl.delWaterValueUsed));
+router.delete("/:id", authenticate, ctrlWrapper(ctrl.delWaterVolumeUsed));
 
-router.patch("/:id", authenticate, ctrlWrapper(ctrl.updateWaterValueUsed));
+router.patch("/:id", authenticate, ctrlWrapper(ctrl.updateWaterVolumeUsed));
 
 module.exports = router;
 
-// todayWaterValueUsed;
+// todayWaterVolumeUsed;

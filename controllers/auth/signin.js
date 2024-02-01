@@ -22,25 +22,25 @@ const { JWT_SECRET } = process.env;
 //   await User.findByIdAndUpdate(user._id, { token });
 //   res.status(200).json({
 //     token,
-//     user: { email, userName, gender, waterRate, avatarURL },
+//     user: { email, user, gender, waterRate, avatarURL },
 //   });
 // };
 
 const signin = async (req, res, next) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email });
+  const userName = await User.findOne({ email });
 
-  if (!user) {
+  if (!userName) {
     throw HttpError(401, "Email or password is wrong");
   }
 
-  const passwordCompare = await bcrypt.compare(password, user.password);
+  const passwordCompare = await bcrypt.compare(password, userName.password);
   if (!passwordCompare) {
     throw HttpError(401, "Email or password is wrong");
   }
 
   const avatar = gravatar.url(email);
-  const { _id, userName = "", avatarURL = avatar, gender, waterRate } = user;
+  const { _id, user = "", avatarURL = avatar, gender, waterRate } = userName;
   const payload = {
     id: _id,
   };
@@ -53,7 +53,7 @@ const signin = async (req, res, next) => {
     token,
     user: {
       email,
-      userName,
+      user,
       gender,
       waterRate,
       avatarURL,
