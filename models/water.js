@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
 // waterinput
-const waterAddSchema = new Schema(
+const waterAddSchema = Schema(
   {
     owner: {
       type: Schema.Types.ObjectId,
