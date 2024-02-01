@@ -53,8 +53,7 @@ const joiSignupSchema = Joi.object({
 
 const joiSigninSchema = Joi.object({
   email: Joi.string().required(),
-  password: Joi.string().min(8).max(64).required(),
-  gender: Joi.string().valid("male", "female"),
+  password: Joi.string().min(8).max(64).required(), 
 });
 
 const User = model("user", userSchema);
