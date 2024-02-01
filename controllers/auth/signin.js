@@ -6,41 +6,21 @@ const { User } = require("../../models/users");
 const { HttpError } = require("../../helpers/HttpErrors");
 const { JWT_SECRET } = process.env;
 
-// const signin = async (req, res) => {
-//   const { email, password } = req.body;
-//   const user = await User.findOne({ email });
-//   if (!user) {
-//     throw new Unauthorized(`Email ${email} not found`);
-//   }
-//   const passCompare = bcrypt.compareSync(password, user.password);
-//   if (!passCompare) {
-//     throw new Unauthorized("Password wrong");
-//   }
-//   req.body.signin = true;
-//   const payload = { id: user._id };
-//   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
-//   await User.findByIdAndUpdate(user._id, { token });
-//   res.status(200).json({
-//     token,
-//     user: { email, user, gender, waterRate, avatarURL },
-//   });
-// };
-
 const signin = async (req, res, next) => {
   const { email, password } = req.body;
-  const userName = await User.findOne({ email });
+  const user = await User.findOne({ email });
 
-  if (!userName) {
+  if (!user) {
     throw HttpError(401, "Email or password is wrong");
   }
 
-  const passwordCompare = await bcrypt.compare(password, userName.password);
+  const passwordCompare = await bcrypt.compare(password, user.password);
   if (!passwordCompare) {
     throw HttpError(401, "Email or password is wrong");
   }
 
   const avatar = gravatar.url(email);
-  const { _id, user = "", avatarURL = avatar, gender, waterRate } = userName;
+  const { _id, name, avatarURL = avatar, gender, waterRate } = user;
   const payload = {
     id: _id,
   };
@@ -53,7 +33,7 @@ const signin = async (req, res, next) => {
     token,
     user: {
       email,
-      user,
+      name,
       gender,
       waterRate,
       avatarURL,

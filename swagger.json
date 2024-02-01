@@ -369,7 +369,7 @@
             "description": "User's email",
             "format": "email"
           },
-          "user": {
+          "name": {
             "type": "string",
             "description": "User's name",
             "example": "User"
@@ -398,7 +398,7 @@
         "example": {
           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTQwNywiZXhwIjoxNzA2NTQyMjA3fQ.s0M50RpudKPoL25S_xJpMZJez9dgaRdUTdpD6wqmmTo",
           "email": "testuser@mail.com",
-          "user": "",
+          "name": "",
           "avatarURL": "",
           "gender": "female",
           "waterRate": 2000,
@@ -434,7 +434,7 @@
             "description": "User's email",
             "format": "email"
           },
-          "user": {
+          "name": {
             "type": "string",
             "description": "User's name",
             "example": "User"
@@ -463,7 +463,7 @@
         "example": {
           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTQwNywiZXhwIjoxNzA2NTQyMjA3fQ.s0M50RpudKPoL25S_xJpMZJez9dgaRdUTdpD6wqmmTo",
           "email": "testuser@mail.com",
-          "user": "",
+          "name": "",
           "avatarURL": "",
           "gender": "female",
           "waterRate": 2000,
@@ -488,7 +488,7 @@
             "description": "New user's password",
             "example": "1234567890test"
           },
-          "user": {
+          "name": {
             "type": "string",
             "description": "User's name",
             "example": "User"
@@ -502,7 +502,7 @@
         "example": {
           "email": "testuser@mail.com",
           "avatarURL": "",
-          "user": "",
+          "name": "",
           "gender": "female",
           "password": "1234567890",
           "newPassword": "1234567890test"
@@ -516,7 +516,7 @@
             "description": "User's email",
             "format": "email"
           },
-          "user": {
+          "name": {
             "type": "string",
             "description": "User's name",
             "example": "User"
@@ -545,7 +545,7 @@
         "example": {
           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTQwNywiZXhwIjoxNzA2NTQyMjA3fQ.s0M50RpudKPoL25S_xJpMZJez9dgaRdUTdpD6wqmmTo",
           "email": "testuser@mail.com",
-          "user": "",
+          "name": "",
           "avatarURL": "",
           "gender": "female",
           "waterRate": 2000,
