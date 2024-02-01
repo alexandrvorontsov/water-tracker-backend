@@ -14,7 +14,7 @@ const userSchema = Schema(
       minlength: 8,
       maxlength: 64,
     },
-    name: { type: String, default: "", required: false, maxlength: 32 },
+    name: { type: String, required: false, maxlength: 32 },
     gender: {
       type: String,
       enum: ["male", "female"],

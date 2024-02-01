@@ -1,5 +1,5 @@
 const ctrlWrapper = require("./ctrlWrapper");
-const HttpError = require("./HttpErrors");
+const HttpError = require("./HttpError");
 const calcWater = require("./calcWater");
 
 module.exports = {

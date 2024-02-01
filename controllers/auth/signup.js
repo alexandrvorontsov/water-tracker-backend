@@ -1,9 +1,8 @@
 // const { Conflict } = require("http-errors");
 const bcrypt = require("bcryptjs");
-
 const jwt = require("jsonwebtoken");
-
 const { User } = require("../../models/users");
+
 const { JWT_SECRET } = process.env;
 
 const signup = async (req, res) => {

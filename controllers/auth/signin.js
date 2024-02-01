@@ -2,11 +2,11 @@
 const gravatar = require("gravatar");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const { User } = require("../../models/users");
-const { HttpError } = require("../../helpers/HttpErrors");
+const { User } = require("../../models/index");
+const { HttpError } = require("../../helpers");
 const { JWT_SECRET } = process.env;
 
-const signin = async (req, res, next) => {
+const signin = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
