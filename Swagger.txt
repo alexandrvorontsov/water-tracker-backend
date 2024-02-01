@@ -18,7 +18,7 @@ RESPONSE=> 201
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTQwNywiZXhwIjoxNzA2NTQyMjA3fQ.s0M50RpudKPoL25S_xJpMZJez9dgaRdUTdpD6wqmmTo",
     "user": {
         "email": "test@mail.com",
-        "userName": "",
+        "user": "",
         "avatarURL": "",
         "gender": "female",
         "waterRate": 2000
@@ -41,7 +41,7 @@ RESPONSE=> 200
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjY4MTBmN2E0ZTg3MTE3MDIzMTQ2ZSIsImlhdCI6MTcwNjQ1OTY2OSwiZXhwIjoxNzA2NTQyNDY5fQ.FQ9Yhl_x2mMKHf0VxKCo8U_WZ0twYyXk2x-Me5ccpfg",
     "user": {
         "email": "test@mail.com",
-        "userName": "",
+        "user": "",
         "avatarURL": "",
         "gender": "female",
         "waterRate": 2000
@@ -75,7 +75,7 @@ RESPONSE=> 200
 {
     "email": "test@mail.com",
     "avatarURL": "",
-    "userName": "",
+    "user": "",
     "gender": "female",
     "waterRate": 2000
 }
@@ -92,7 +92,7 @@ RESPONSE=> 200
 {
     "email": "test@mail.com",
     "avatarURL": "",
-    "userName": "",
+    "user": "",
     "gender": "female",
     "password": "1234567890test"
 }

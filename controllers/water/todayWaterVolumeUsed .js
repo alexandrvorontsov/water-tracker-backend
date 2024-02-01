@@ -1,7 +1,7 @@
 const { WaterInput } = require("../../models");
 const { calcWater } = require("../../helpers");
 
-const todayWaterValueUsed = async (req, res) => {
+const todayWaterVolumeUsed = async (req, res) => {
   const {
     user: { _id: owner, waterRate },
   } = req;
@@ -36,4 +36,4 @@ const todayWaterValueUsed = async (req, res) => {
   res.json({ waterInputToday, drinksTodayPercent });
 };
 
-module.exports = todayWaterValueUsed;
+module.exports = todayWaterVolumeUsed;

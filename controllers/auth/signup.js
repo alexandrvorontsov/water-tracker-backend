@@ -19,7 +19,7 @@ const { JWT_SECRET } = process.env;
 //   const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
 //   await User.create({
-//     userName,
+//     user,
 //     email,
 //     password: hashPassword,
 //     avatarURL,
@@ -29,7 +29,7 @@ const { JWT_SECRET } = process.env;
 
 //   res.status(201).json({
 //     message: "New user has been created!",
-//     user: { email, userName, waterRate, gender, avatarURL },
+//     user: { email, user, waterRate, gender, avatarURL },
 //   });
 // };
 
@@ -40,7 +40,7 @@ const signup = async (req, res, next) => {
 
   const {
     _id,
-    userName = "",
+    user = "",
     gender,
     waterRate,
     avatarURL = "",
@@ -56,7 +56,7 @@ const signup = async (req, res, next) => {
     token,
     user: {
       email,
-      userName,
+      user,
       gender,
       waterRate,
       avatarURL,

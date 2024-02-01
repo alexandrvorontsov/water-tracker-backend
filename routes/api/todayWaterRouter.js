@@ -6,6 +6,6 @@ const { water: ctrl } = require("../../controllers");
 
 const router = express.Router();
 
-router.get("/", authenticate, ctrlWrapper(ctrl.todayWaterValueUsed));
+router.get("/", authenticate, ctrlWrapper(ctrl.todayWaterVolumeUsed));
 
 module.exports = router;
