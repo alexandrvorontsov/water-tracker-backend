@@ -11,4 +11,4 @@ const validateReqBody = (scheme) => {
   return func;
 };
 
-module.export = validateReqBody;
+module.exports = validateReqBody;
