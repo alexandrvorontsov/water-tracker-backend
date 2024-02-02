@@ -1,36 +1,37 @@
+const cloudinary = require("cloudinary").v2;
 const { User } = require("../../models");
-const path = require("path");
+const { HttpError } = require("../../helpers");
 const fs = require("fs/promises");
-const Jimp = require("jimp");
 
-const avatarDir = path.join(__dirname, "../../", "public", "avatars");
+const { CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET } =
+  process.env;
+
+cloudinary.config({
+  cloud_name: CLOUDINARY_CLOUD_NAME,
+  api_key: CLOUDINARY_API_KEY,
+  api_secret: CLOUDINARY_API_SECRET,
+});
 
 const updateAvatar = async (req, res) => {
-  const { path: tempUpload, originalname } = req.file;
-  const { _id: id } = req.user;
-  const imageName = `${id}_${originalname}`;
-  try {
-    const jimpAvatar = await Jimp.read(tempUpload);
-    await jimpAvatar
-      .autocrop()
-      .cover(
-        250,
-        250,
-        Jimp.HORIZONTAL_ALIGN_CENTER || Jimp.VERTICAL_ALIGN_MIDDLE
-      )
-      .writeAsync(tempUpload);
+  const { _id } = req.user;
 
-    const resultUpload = path.join(avatarDir, imageName);
-    await fs.rename(tempUpload, resultUpload);
-
-    const avatarURL = path.join("public", "avatars", imageName);
-    await User.findByIdAndUpdate(req.user._id, { avatarURL }, { new: true });
-
-    res.status(200).json({ avatarURL });
-  } catch (error) {
-    await fs.unlink(tempUpload);
-    throw error;
+  if (!req.file) {
+    throw HttpError(400, "File not found");
   }
+  const { path } = req.file;
+
+  const { secure_url: avatarURL } = await cloudinary.uploader.upload(path, {
+    folder: "water-tracker/avatars",
+    public_id: `${_id}_avatar`,
+    overwrite: true,
+    transformation: { width: 350, height: 350, gravity: "faces", crop: "fill" },
+  });
+
+  await fs.unlink(path);
+  await User.findByIdAndUpdate(_id, { avatarURL });
+  res.status(200).json({
+    avatarURL,
+  });
 };
 
 module.exports = updateAvatar;

@@ -1,7 +1,7 @@
 const express = require("express");
 const {
   authenticate,
-  validateBody,
+  isEmptyBody,
   ctrlWrapper,
   upload,
 } = require("../../middlewares");
