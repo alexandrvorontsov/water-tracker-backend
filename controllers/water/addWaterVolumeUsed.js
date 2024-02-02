@@ -7,14 +7,11 @@ const addWaterVolumeUsed = async (req, res, next) => {
       user: { _id: owner },
     } = req;
 
-    // console.log({ _id });
-    console.log({ _id: owner });
-
     const addPortion = await WaterInput.create({ ...req.body, owner });
     if (!addPortion) {
       throw HttpError(404, "Portion not found");
     }
-    // console.log(addPortion);
+
     res.status(201).json({
       _id: addPortion._id,
       owner: addPortion.owner,
@@ -22,7 +19,7 @@ const addWaterVolumeUsed = async (req, res, next) => {
       date: addPortion.date,
     });
   } catch (error) {
-    next(error); // Передача помилки до middleware для обробки
+    next(error);
   }
 };
 

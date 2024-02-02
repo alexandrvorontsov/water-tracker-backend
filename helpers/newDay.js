@@ -14,4 +14,4 @@ const newDay = (array) => {
   }, {});
 };
 
-module.export = newDay;
+module.exports = newDay;
