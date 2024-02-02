@@ -1,35 +1,36 @@
-const { WaterInput } = require("../../models");
+const WaterInput = require("../../models");
 const { calcWater } = require("../../helpers");
 
+// getToday
 const todayWaterVolumeUsed = async (req, res) => {
   const {
     user: { _id: owner, waterRate },
   } = req;
 
-  console.log({ _id: owner, waterRate });
+  // console.log({ _id: owner, waterRate });
+
   const currentDate = new Date();
-  const startDay = new Date(currentDate);
-  startDay.setUTCHours(0, 0, 0, 0);
+  const start = new Date(currentDate);
+  start.setUTCHours(0, 0, 0, 0);
 
-  console.log(startDay);
+  const end = new Date(currentDate);
+  end.setUTCHours(23, 59, 59, 0);
 
-  const endDay = new Date(currentDate);
-  endDay.setUTCHours(23, 59, 59, 0);
-
-  console.log(endDay);
+  // console.log(start);
+  // console.log(end);
 
   const waterInputToday = await WaterInput.find({
     date: {
-      $gte: startDay,
-      $lte: endDay,
+      $gte: start,
+      $lte: end,
     },
     owner,
   }).select("-createdAt -updatedAt");
 
-  console.log({
-    $gte: startDay,
-    $lte: endDay,
-  });
+  // console.log({
+  //   $gte: start,
+  //   $lte: end,
+  // });
 
   const drinksTodayPercent = calcWater(waterInputToday, waterRate);
 
