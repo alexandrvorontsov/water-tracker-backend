@@ -18,7 +18,7 @@ router.patch("/", authenticate, ctrlWrapper(ctrl.updateUserInfo));
 router.patch(
   "/avatar",
   authenticate,
-  upload.single("avatar"),
+  upload.single("Avatar"),
   ctrlWrapper(ctrl.updateAvatar)
 );
 
