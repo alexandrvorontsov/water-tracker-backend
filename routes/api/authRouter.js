@@ -12,6 +12,6 @@ const router = express.Router();
 
 router.post("/signup", validateBody(joiSignupSchema), ctrlWrapper(ctrl.signup));
 router.post("/signin", validateBody(joiSigninSchema), ctrlWrapper(ctrl.signin));
-router.post("/signout", ctrlWrapper(ctrl.signout));
+router.post("/signout", authenticate, ctrlWrapper(ctrl.signout));
 
 module.exports = router;
