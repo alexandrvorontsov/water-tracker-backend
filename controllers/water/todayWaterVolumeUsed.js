@@ -7,18 +7,13 @@ const todayWaterVolumeUsed = async (req, res) => {
     user: { _id: owner, waterRate },
   } = req;
 
-  const myTimeZone = 2;
-  // const currentDate = new Date();
-  const currentDate = new Date() + myTimeZone;
-  // console.log(currentDate);
-
+  const currentDate = new Date();
   const start = new Date(currentDate);
-  start.setUTCHours(0, 0, 0, 0);
-
+  start.setHours(0, 0, 0, 0);
   const end = new Date(currentDate);
-  end.setUTCHours(23, 59, 59, 0);
+  end.setHours(23, 59, 59, 999);
 
-  const waterInputToday = await WaterInput.find({
+  const dayPortions = await WaterInput.find({
     date: {
       $gte: start,
       $lte: end,
@@ -26,9 +21,9 @@ const todayWaterVolumeUsed = async (req, res) => {
     owner,
   }).select("-createdAt -updatedAt");
 
-  const drinksTodayPercent = calc(waterInputToday, waterRate);
+  const percentage = calc(dayPortions, waterRate);
 
-  res.json({ waterInputToday, drinksTodayPercent });
+  res.json({ dayPortions, percentage });
 };
 
 module.exports = todayWaterVolumeUsed;

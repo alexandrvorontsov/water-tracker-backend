@@ -3,6 +3,7 @@ const ctrlWrapper = require("../helpers/ctrlWrapper");
 const authenticate = require("./authenticate");
 const upload = require("./upload");
 const isEmptyBody = require("./isEmplyBody");
+const validateMonth = require("./validateMonth");
 
 module.exports = {
   validateBody,
@@ -10,4 +11,5 @@ module.exports = {
   authenticate,
   upload,
   isEmptyBody,
+  validateMonth,
 };
