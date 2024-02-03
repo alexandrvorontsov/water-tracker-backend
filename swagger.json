@@ -336,6 +336,199 @@
           }
         }
       }
+    },
+     "/water/": {
+      "post": {
+        "tags": ["Water"],
+        "summary": "Add water dose ",
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Dose's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddWaterRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WaterResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": " Not authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/water/{id}": {
+      "patch": {
+        "tags": ["Water"],
+        "summary": "Update water dose ",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "Dose's id"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Dose's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddWaterRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WaterResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": " Not authorized",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Water"],
+        "summary": "Delete water dose ",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "Dose's id"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WaterResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": " Not authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/today/{date}": {
+      "get": {
+        "tags": ["Water"],
+        "summary": "List of doses per day ",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "date",
+            "required": true,
+            "type": "string",
+            "description": "Date's today",
+            "example": "2024-01-30"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WaterResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": " Not authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/month/{date}": {
+      "get": {
+        "tags": ["Water"],
+        "summary": "Information per month",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "date",
+            "required": true,
+            "type": "string",
+            "description": "Date's today",
+            "example": "2024-01-01"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MonthWaterResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": " Not authorized",
+            "content": {}
+          }
+        }
+      }
     }
   },
   "components": {
@@ -550,6 +743,128 @@
           "gender": "female",
           "waterRate": 2000,
           "date": "2024-01-30"
+        }
+      },
+       "AddWaterRequest": {
+        "type": "object",
+        "required": ["date", "time", "water"],
+        "properties": {
+          "time": {
+            "type": "string",
+            "description": "Time of dose addition",
+            "example": "00:00"
+          },
+          "waterValue": {
+            "type": "number",
+            "description": "Dose size",
+            "example": 100
+          },
+          "date": {
+            "type": "string",
+            "description": "Date of dose addition",
+            "example": "2024-01-30"
+          }
+        },
+        "example": {
+          "date": "2024-01-30",
+          "time": "00:00",
+          "waterValue": 200
+        }
+      },
+      "WaterResponse": {
+        "type": "object",
+        "properties": {
+          "percentage": {
+            "type": "number",
+            "description": "Percentage of the daily rate",
+            "example": 31
+          },
+          "dailyPortions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Dose's id",
+                  "example": "65b933d060bd22e993ec36a2"
+                },
+                "time": {
+                  "type": "string",
+                  "description": "Time of dose addition",
+                  "example": "00:00"
+                },
+                "waterValue": {
+                  "type": "number",
+                  "description": "Dose size",
+                  "example": 100
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "dailyPortions": [
+            {
+              "id": "65ba785cbd84ba65bfe31419",
+              "time": "16:42",
+              "waterValue": 1500
+            },
+            {
+              "id": "65ba88d3a881baf02a126af5",
+              "time": "17:52",
+              "waterValue": 50
+            }
+          ],
+          "percentage": 78
+        }
+      },
+      "MonthWaterResponse": {
+        "type": "object",
+        "properties": {
+          "waterRate": {
+            "type": "number",
+            "description": "User water rate",
+            "example": 2000
+          },
+          "month": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "description": "Registration date",
+                  "example": "2024-01-31"
+                },
+                "percentage": {
+                  "type": "number",
+                  "description": "Percentage of the daily rate",
+                  "example": 78
+                },
+                "doses": {
+                  "type": "number",
+                  "description": "Quantity of doses per day",
+                  "example": 2
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "month": [
+            {
+              "date": "2024-01-30",
+              "percentage": 85,
+              "doses": 4
+            },
+            {
+              "date": "2024-01-31",
+              "percentage": 78,
+              "doses": 2
+            }
+          ],
+          "waterRate": 2000
         }
       }
     },
