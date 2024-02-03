@@ -1,10 +1,10 @@
 // const { Conflict } = require("http-errors");
 const bcrypt = require("bcryptjs");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const { User } = require("../../models/users");
 const { HttpError } = require("../../helpers");
 
-// const { JWT_SECRET } = process.env;
+const { JWT_SECRET } = process.env;
 
 const signup = async (req, res) => {
   const { password, email } = req.body;
@@ -24,13 +24,16 @@ const signup = async (req, res) => {
     avatarURL = "",
   } = await User.create(req.body);
 
-  // const payload = {
-  //   id: _id,
-  // };
+  const payload = {
+    id: _id,
+  };
 
-  // const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
+
+  await User.findByIdAndUpdate(_id, { token });
 
   res.status(201).json({
+    token,
     user: {
       email,
       name,
