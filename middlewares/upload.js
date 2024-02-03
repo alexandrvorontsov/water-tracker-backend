@@ -12,21 +12,23 @@ const storage = multer.diskStorage({
 });
 
 const limits = {
-  fileSize: 15 * 1024 * 1024,
+  fileSize: 2097152,
 };
+// limits 2Mb
 
-const format = (req, file, cb) => {
-  const fileFilter = file.originalname.split(".").pop().toUpperCase();
-  if (fileFilter !== "jpg") {
-    return cb(HttpError(400, "Adjust the allowed formats as needed jpg"));
+const fileFilter = (req, file, cb) => {
+  const allowedFormats = ["image/jpeg"];
+  if (allowedFormats.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(HttpError(400, "Adjust the allowed formats as needed image/jpeg"));
   }
-  cb(null, true);
 };
 
 const upload = multer({
   storage,
   limits,
-  format,
+  fileFilter,
 });
 
 module.exports = upload;

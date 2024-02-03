@@ -56,10 +56,17 @@ const joiSigninSchema = Joi.object({
   password: Joi.string().min(8).max(64).required(),
 });
 
+const joiUserSchema = Joi.object({
+  name: Joi.string().max(32).required(),
+  email: Joi.string().email().required(),
+  gender: Joi.string().valid("male", "female"),
+});
+
 const User = model("user", userSchema);
 
 module.exports = {
   User,
   joiSignupSchema,
   joiSigninSchema,
+  joiUserSchema,
 };
