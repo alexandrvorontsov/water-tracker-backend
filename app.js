@@ -26,8 +26,8 @@ app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/water-rate", waterRateRouter);
 app.use("/water", waterRouter);
-app.use("/today", todayWaterRouter);
-app.use("/month", monthWaterRouter);
+app.use("/water/today", todayWaterRouter);
+app.use("/water/month", monthWaterRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res) => {
