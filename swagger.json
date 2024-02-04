@@ -295,11 +295,11 @@
                   "waterRate": {
                     "type": "number",
                     "description": "User water rate",
-                    "example": 2000
+                    "example": 2.0
                   }
                 },
                 "example": {
-                  "waterRate": 2000
+                  "waterRate": 2.0
                 }
               }
             }
@@ -316,11 +316,11 @@
                     "waterRate": {
                       "type": "number",
                       "description": "User water rate",
-                      "example": 2000
+                      "example": 2.0
                     }
                   },
                   "example": {
-                    "waterRate": 2000
+                    "waterRate": 2.0
                   }
                 }
               }
@@ -340,10 +340,10 @@
      "/water/": {
       "post": {
         "tags": ["Water"],
-        "summary": "Add water dose ",
+        "summary": "Add water servings",
         "security": [{ "Bearer": [] }],
         "requestBody": {
-          "description": "Dose's object",
+          "description": "Servings object",
           "required": true,
           "content": {
             "application/json": {
@@ -378,19 +378,19 @@
     "/water/{id}": {
       "patch": {
         "tags": ["Water"],
-        "summary": "Update water dose ",
+        "summary": "Update water servings ",
         "parameters": [
           {
             "in": "path",
             "name": "id",
             "required": true,
             "type": "string",
-            "description": "Dose's id"
+            "description": "Servings id"
           }
         ],
         "security": [{ "Bearer": [] }],
         "requestBody": {
-          "description": "Dose's object",
+          "description": "Servings object",
           "required": true,
           "content": {
             "application/json": {
@@ -423,14 +423,14 @@
       },
       "delete": {
         "tags": ["Water"],
-        "summary": "Delete water dose ",
+        "summary": "Delete water servings ",
         "parameters": [
           {
             "in": "path",
             "name": "id",
             "required": true,
             "type": "string",
-            "description": "Dose's id"
+            "description": "Servings id"
           }
         ],
         "security": [{ "Bearer": [] }],
@@ -540,7 +540,8 @@
           "email": {
             "type": "string",
             "description": "User's email",
-            "format": "email"
+            "format": "email",
+            "example": "vitalii@gmail.com"
           },
           "password": {
             "type": "string",
@@ -560,12 +561,13 @@
           "email": {
             "type": "string",
             "description": "User's email",
-            "format": "email"
+            "format": "email",
+            "example": "vitalii@gmail.com"
           },
           "name": {
             "type": "string",
             "description": "User's name",
-            "example": "User"
+            "example": "Vitalii"
           },
           "avatarURL": {
             "type": "string",
@@ -580,7 +582,7 @@
           "waterRate": {
             "type": "number",
             "description": "User water rate",
-            "example": 2000
+            "example": 2.0
           },
           "date": {
             "type": "string",
@@ -594,7 +596,7 @@
           "name": "Vitalii",
           "avatarURL": "https://res.cloudinary.com/doojzyo8d/image/upload/v1706979817/water-tracker/avatars/65b8535366f632bd6e48f05d_avatar.jpg",
           "gender": "male",
-          "waterRate": 2000,
+          "waterRate": 2.0,
           "date": "2024-01-30"
         }
       },
@@ -605,7 +607,8 @@
           "email": {
             "type": "string",
             "description": "User's email",
-            "format": "email"
+            "format": "email",
+            "example": "vitalii@gmail.com"
           },
           "password": {
             "type": "string",
@@ -625,12 +628,13 @@
           "email": {
             "type": "string",
             "description": "User's email",
-            "format": "email"
+            "format": "email",
+           "example":"vitalii@gmail.com"
           },
           "name": {
             "type": "string",
             "description": "User's name",
-            "example": "User"
+            "example": "Vitalii"
           },
           "avatarURL": {
             "type": "string",
@@ -645,7 +649,7 @@
           "waterRate": {
             "type": "number",
             "description": "User water rate",
-            "example": 2000
+            "example": 2.0
           },
           "date": {
             "type": "string",
@@ -659,7 +663,7 @@
           "name": "Vitalii",
           "avatarURL": "https://res.cloudinary.com/doojzyo8d/image/upload/v1706979817/water-tracker/avatars/65b8535366f632bd6e48f05d_avatar.jpg",
           "gender": "male",
-          "waterRate": 2000,
+          "waterRate": 2.0,
           "date": "2024-01-30"
         }
       },
@@ -669,7 +673,8 @@
           "email": {
             "type": "string",
             "description": "User's email",
-            "format": "email"
+            "format": "email",
+            "example": "vitalii@gmail.com"
           },
           "password": {
             "type": "string",
@@ -684,7 +689,7 @@
           "name": {
             "type": "string",
             "description": "User's name",
-            "example": "User"
+            "example": "Vitalii"
           },
           "gender": {
             "type": "string",
@@ -707,12 +712,13 @@
           "email": {
             "type": "string",
             "description": "User's email",
-            "format": "email"
+            "format": "email",
+            "example": "vitalii@gmail.com"
           },
           "name": {
             "type": "string",
             "description": "User's name",
-            "example": "User"
+            "example": "Vitalii"
           },
           "avatarURL": {
             "type": "string",
@@ -727,7 +733,7 @@
           "waterRate": {
             "type": "number",
             "description": "User water rate",
-            "example": 2000
+            "example": 2.0
           },
           "date": {
             "type": "string",
@@ -741,7 +747,7 @@
           "name": "Vitalii",
           "avatarURL": "https://res.cloudinary.com/doojzyo8d/image/upload/v1706979817/water-tracker/avatars/65b8535366f632bd6e48f05d_avatar.jpg",
           "gender": "male",
-          "waterRate": 2000,
+          "waterRate": 2.0,
           "date": "2024-01-30"
         }
       },
@@ -751,24 +757,24 @@
         "properties": {
           "time": {
             "type": "string",
-            "description": "Time of dose addition",
+            "description": "Time of servings addition",
             "example": "00:00"
           },
-          "waterValue": {
+          "waterVolume": {
             "type": "number",
-            "description": "Dose size",
-            "example": 100
+            "description": "Servings size",
+            "example": 150
           },
           "date": {
             "type": "string",
-            "description": "Date of dose addition",
-            "example": "2024-01-30"
+            "description": "Date of servings addition",
+            "example": "2024-02-01"
           }
         },
         "example": {
           "date": "2024-01-30",
           "time": "00:00",
-          "waterValue": 200
+          "waterValue": 150
         }
       },
       "WaterResponse": {
@@ -786,17 +792,17 @@
               "properties": {
                 "id": {
                   "type": "string",
-                  "description": "Dose's id",
+                  "description": "Servings id",
                   "example": "65b933d060bd22e993ec36a2"
                 },
                 "time": {
                   "type": "string",
-                  "description": "Time of dose addition",
+                  "description": "Time of servings addition",
                   "example": "00:00"
                 },
-                "waterValue": {
+                "waterVolume": {
                   "type": "number",
-                  "description": "Dose size",
+                  "description": "Servings size",
                   "example": 100
                 }
               }
@@ -808,15 +814,15 @@
             {
               "id": "65ba785cbd84ba65bfe31419",
               "time": "16:42",
-              "waterValue": 1500
+              "waterVolume": 150
             },
             {
               "id": "65ba88d3a881baf02a126af5",
               "time": "17:52",
-              "waterValue": 50
+              "waterVolume": 50
             }
           ],
-          "percentage": 78
+          "percentage": 10
         }
       },
       "MonthWaterResponse": {
@@ -825,7 +831,7 @@
           "waterRate": {
             "type": "number",
             "description": "User water rate",
-            "example": 2000
+            "example": 2.0
           },
           "month": {
             "type": "array",
@@ -840,11 +846,11 @@
                 "percentage": {
                   "type": "number",
                   "description": "Percentage of the daily rate",
-                  "example": 78
+                  "example": 10
                 },
-                "doses": {
+                "servings": {
                   "type": "number",
-                  "description": "Quantity of doses per day",
+                  "description": "Quantity of servings per day",
                   "example": 2
                 }
               }
@@ -856,15 +862,15 @@
             {
               "date": "2024-01-30",
               "percentage": 85,
-              "doses": 4
+              "servings": 4
             },
             {
               "date": "2024-01-31",
-              "percentage": 78,
-              "doses": 2
+              "percentage": 10,
+              "servings": 2
             }
           ],
-          "waterRate": 2000
+          "waterRate": 2.0
         }
       }
     },
