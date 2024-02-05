@@ -37,15 +37,6 @@ const userSchema = Schema(
   { versionKey: false, timestamps: true }
 );
 
-// const joiSignupSchema = Joi.object({
-//   user: Joi.string().required(),
-//   email: Joi.string().required(),
-//   password: Joi.string().min(6).required(),
-//   gender: Joi.string().valid("male", "female"),
-// });
-
-// JOI
-
 const joiSignupSchema = Joi.object({
   email: Joi.string().required(),
   password: Joi.string().min(8).max(64).required(),
@@ -60,6 +51,8 @@ const joiUserSchema = Joi.object({
   name: Joi.string().max(32).required(),
   email: Joi.string().email().required(),
   gender: Joi.string().valid("male", "female"),
+  oldPassword: Joi.string().min(8).max(64).required(),
+  newPassword: Joi.string().min(8).max(64).required(),
 });
 
 const User = model("user", userSchema);

@@ -1,13 +1,51 @@
 const { HttpError } = require("../../helpers");
 const { User } = require("../../models");
+const bcrypt = require("bcryptjs");
 
 const updateUserInfo = async (req, res) => {
-  const { email, name, gender } = req.body;
+  const { email, name, gender, oldPassword, newPassword } = req.body;
   const { _id } = req.user;
-  const updatedUser = { email, name };
+  const user = { email, name };
+
+  let hashedNewPassword;
+
+  if (oldPassword && newPassword) {
+    const user = await User.findById(_id);
+    if (!user) {
+      throw HttpError(404, "User not found");
+    }
+
+    const { password } = user;
+
+    if (oldPassword === newPassword) {
+      throw HttpError(
+        409,
+        "The new password must not be the same as the old one"
+      );
+    }
+
+    const comparedPassword = await bcrypt.compare(oldPassword, password);
+
+    if (!comparedPassword) {
+      throw HttpError(409, "The current password is not correct");
+    }
+
+    hashedNewPassword = await bcrypt.hash(newPassword, 10);
+  } else if (newPassword) {
+    throw HttpError(
+      400,
+      "To change the password, provide both old password and new password"
+    );
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    { ...req.body, password: hashedNewPassword },
+    { new: true }
+  );
 
   if (gender) {
-    updatedUser.gender = gender;
+    user.gender = gender;
   }
 
   const updUser = await User.findByIdAndUpdate(_id, updatedUser, {
