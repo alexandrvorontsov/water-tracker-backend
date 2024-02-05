@@ -48,11 +48,11 @@ const joiSigninSchema = Joi.object({
 });
 
 const joiUserSchema = Joi.object({
-  name: Joi.string().max(32).required(),
-  email: Joi.string().email().required(),
+  name: Joi.string().max(32),
+  email: Joi.string().email(),
   gender: Joi.string().valid("male", "female"),
-  oldPassword: Joi.string().min(8).max(64).required(),
-  newPassword: Joi.string().min(8).max(64).required(),
+  oldPassword: Joi.string().min(8).max(64),
+  newPassword: Joi.string().min(8).max(64),
 });
 
 const User = model("user", userSchema);
