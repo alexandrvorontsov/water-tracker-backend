@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 
 const updateUserInfo = async (req, res) => {
   const { email, name, gender, oldPassword, newPassword } = req.body;
-  const { _id } = req.user;
+  const { _id, avatarURL } = req.user;
   const user = { email, name };
 
   let hashedNewPassword;
@@ -62,6 +62,7 @@ const updateUserInfo = async (req, res) => {
       email: updUser.email,
       name: updUser.name,
       gender: updUser.gender,
+      avatarURL,
     },
   };
 
