@@ -10,9 +10,9 @@ const { water: ctrl } = require("../../controllers");
 const router = express.Router();
 
 router.get(
-  "/:month",
+  "/:date",
   authenticate,
-  // validateMonth,
+  validateMonth,
   ctrlWrapper(ctrl.monthWaterVolumeUsed)
 );
 
