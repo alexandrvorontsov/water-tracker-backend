@@ -48,7 +48,7 @@ const updateUserInfo = async (req, res) => {
     user.gender = gender;
   }
 
-  const updUser = await User.findByIdAndUpdate(_id, updatedUser, {
+  const updUser = await User.findByIdAndUpdate(_id, {
     new: true,
   });
 
