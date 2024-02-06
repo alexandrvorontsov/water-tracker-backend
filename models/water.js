@@ -1,7 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
-// waterinput base
 const waterAddSchema = Schema(
   {
     owner: {
@@ -26,7 +25,6 @@ const waterAddSchema = Schema(
 
 const WaterInput = model("waterInput", waterAddSchema);
 
-// Joi
 const joiWaterRateSchema = Joi.object({
   waterRate: Joi.number().min(1).max(15000).required(),
 });

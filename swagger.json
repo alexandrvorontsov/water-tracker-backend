@@ -295,11 +295,11 @@
                   "waterRate": {
                     "type": "number",
                     "description": "User water rate",
-                    "example": 2.0
+                    "example": 2000
                   }
                 },
                 "example": {
-                  "waterRate": 2.0
+                  "waterRate": 2000
                 }
               }
             }
@@ -316,11 +316,11 @@
                     "waterRate": {
                       "type": "number",
                       "description": "User water rate",
-                      "example": 2.0
+                      "example": 2000
                     }
                   },
                   "example": {
-                    "waterRate": 2.0
+                    "waterRate": 2000
                   }
                 }
               }
@@ -456,7 +456,7 @@
         }
       }
     },
-    "/today/{date}": {
+    "/water/today/{date}": {
       "get": {
         "tags": ["Water"],
         "summary": "List of doses per day ",
@@ -467,7 +467,7 @@
             "required": true,
             "type": "string",
             "description": "Date's today",
-            "example": "2024-01-30"
+            "example": "2024-01-30T01:39:31.276Z"
           }
         ],
         "security": [{ "Bearer": [] }],
@@ -493,7 +493,7 @@
         }
       }
     },
-    "/month/{date}": {
+    "/water/month/{date}": {
       "get": {
         "tags": ["Water"],
         "summary": "Information per month",
@@ -504,7 +504,7 @@
             "required": true,
             "type": "string",
             "description": "Date's today",
-            "example": "2024-01-30"
+            "example": "2024-01-30T01:39:31.276Z"
           }
         ],
         "security": [{ "Bearer": [] }],
@@ -582,12 +582,12 @@
           "waterRate": {
             "type": "number",
             "description": "User water rate",
-            "example": 2.0
+            "example": 2000
           },
           "date": {
             "type": "string",
             "description": "Registration date",
-            "example": "2024-01-30"
+            "example": "2024-01-30T01:39:31.276Z"
           }
         },
         "example": {
@@ -596,8 +596,8 @@
           "name": "Vitalii",
           "avatarURL": "https://res.cloudinary.com/doojzyo8d/image/upload/v1706979817/water-tracker/avatars/65b8535366f632bd6e48f05d_avatar.jpg",
           "gender": "male",
-          "waterRate": 2.0,
-          "date": "2024-01-30"
+          "waterRate": 2000,
+          "date": "2024-01-30T01:39:31.276Z"
         }
       },
       "AuthenticationRequest": {
@@ -649,12 +649,12 @@
           "waterRate": {
             "type": "number",
             "description": "User water rate",
-            "example": 2.0
+            "example": 2000
           },
           "date": {
             "type": "string",
             "description": "Registration date",
-            "example": "2024-01-30"
+            "example": "2024-01-30T01:39:31.276Z"
           }
         },
         "example": {
@@ -663,8 +663,8 @@
           "name": "Vitalii",
           "avatarURL": "https://res.cloudinary.com/doojzyo8d/image/upload/v1706979817/water-tracker/avatars/65b8535366f632bd6e48f05d_avatar.jpg",
           "gender": "male",
-          "waterRate": 2.0,
-          "date": "2024-01-30"
+          "waterRate": 2000,
+          "date": "2024-01-30T01:39:31.276Z"
         }
       },
       "UpdateUserInfoRequest": {
@@ -676,7 +676,7 @@
             "format": "email",
             "example": "vitalii@gmail.com"
           },
-          "password": {
+          "oldPassword": {
             "type": "string",
             "description": "User's password",
             "example": "1234567890"
@@ -702,7 +702,7 @@
           "avatarURL": "https://res.cloudinary.com/doojzyo8d/image/upload/v1706979817/water-tracker/avatars/65b8535366f632bd6e48f05d_avatar.jpg",
           "name": "Vitalii",
           "gender": "male",
-          "password": "1234567890",
+          "oldPassword": "1234567890",
           "newPassword": "1234567890test"
         }
       },
@@ -733,12 +733,12 @@
           "waterRate": {
             "type": "number",
             "description": "User water rate",
-            "example": 2.0
+            "example": 2000
           },
           "date": {
             "type": "string",
             "description": "Registration date",
-            "example": "2024-01-30"
+            "example": "2024-01-30T01:39:31.276Z"
           }
         },
         "example": {
@@ -747,19 +747,14 @@
           "name": "Vitalii",
           "avatarURL": "https://res.cloudinary.com/doojzyo8d/image/upload/v1706979817/water-tracker/avatars/65b8535366f632bd6e48f05d_avatar.jpg",
           "gender": "male",
-          "waterRate": 2.0,
-          "date": "2024-01-30"
+          "waterRate": 2000,
+          "date": "2024-01-30T01:39:31.276Z"
         }
       },
        "AddWaterRequest": {
         "type": "object",
-        "required": ["date", "time", "water"],
+        "required": ["date", "water"],
         "properties": {
-          "time": {
-            "type": "string",
-            "description": "Time of servings addition",
-            "example": "00:00"
-          },
           "waterVolume": {
             "type": "number",
             "description": "Servings size",
@@ -768,13 +763,12 @@
           "date": {
             "type": "string",
             "description": "Date of servings addition",
-            "example": "2024-02-01"
+            "example": "2024-01-30T01:39:31.276Z"
           }
         },
         "example": {
-          "date": "2024-01-30",
-          "time": "00:00",
-          "waterValue": 150
+          "date": "2024-01-30T01:39:31.276Z",
+          "waterVolume": 150
         }
       },
       "WaterResponse": {
@@ -783,56 +777,56 @@
           "percentage": {
             "type": "number",
             "description": "Percentage of the daily rate",
-            "example": 31
+            "example": 30
           },
-          "dailyPortions": {
+          "dayPortions": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "id": {
+                "_id": {
                   "type": "string",
                   "description": "Servings id",
                   "example": "65b933d060bd22e993ec36a2"
                 },
-                "time": {
+                "owner":{
                   "type": "string",
-                  "description": "Time of servings addition",
-                  "example": "00:00"
+                  "description": "User",
+                  "example": "65b6810f7a4e87117023146e"
                 },
                 "waterVolume": {
                   "type": "number",
                   "description": "Servings size",
                   "example": 100
-                }
+                },
+                "date": {
+            "type": "string",
+            "description": "Date of servings addition",
+            "example": "2024-01-30T01:39:31.276Z"
+          }
               }
             }
           }
         },
         "example": {
-          "dailyPortions": [
+          "dayPortions": [
             {
-              "id": "65ba785cbd84ba65bfe31419",
-              "time": "16:42",
-              "waterVolume": 150
+              "_id": "65ba785cbd84ba65bfe31419",
+              "waterVolume": 150,
+              "owner": "65b6810f7a4e87117023146e",
+              "data": "2024-01-30T01:39:31.276Z"
             },
             {
-              "id": "65ba88d3a881baf02a126af5",
-              "time": "17:52",
-              "waterVolume": 50
+              "_id": "65ba88d3a881baf02a126af5",
+              "waterVolume": 50,
+              "owner": "65b6810f7a4e87117023146e",
+              "data": "2024-01-30T01:39:31.276Z"
             }
           ],
           "percentage": 10
         }
       },
       "MonthWaterResponse": {
-        "type": "object",
-        "properties": {
-          "waterRate": {
-            "type": "number",
-            "description": "User water rate",
-            "example": 2.0
-          },
           "month": {
             "type": "array",
             "items": {
@@ -841,7 +835,12 @@
                 "date": {
                   "type": "string",
                   "description": "Registration date",
-                  "example": "2024-01-31"
+                  "example": "2024-01-30T01:39:31.276Z"
+                },
+                "waterRate": {
+                  "type": "number",
+                  "description": "User water rate",
+                  "example": 2.0
                 },
                 "percentage": {
                   "type": "number",
@@ -855,22 +854,22 @@
                 }
               }
             }
-          }
-        },
+          },
         "example": {
           "month": [
             {
-              "date": "2024-01-30",
-              "percentage": 85,
+              "date": "2024-01-30T01:39:31.276Z",
+              "waterRate": 2.0,
+              "percentage": 90,
               "servings": 4
             },
             {
-              "date": "2024-01-31",
+              "date": "2024-01-30T01:39:31.276Z",
+              "waterRate": 2.0,
               "percentage": 10,
               "servings": 2
             }
-          ],
-          "waterRate": 2.0
+          ]
         }
       }
     },
