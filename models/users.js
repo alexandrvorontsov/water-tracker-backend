@@ -51,8 +51,12 @@ const joiUserSchema = Joi.object({
   name: Joi.string().max(32).required(),
   email: Joi.string().email().required(),
   gender: Joi.string().valid("male", "female"),
-  oldPassword: Joi.string().min(8).max(64).required(),
-  newPassword: Joi.string().min(8).max(64).required(),
+  oldPassword: Joi.string().min(8).max(64),
+  newPassword: Joi.when("oldPassword", {
+    is: Joi.exist(),
+    then: Joi.string().min(8).max(64).required(),
+    otherwise: Joi.forbidden(),
+  }),
 });
 
 const User = model("user", userSchema);
