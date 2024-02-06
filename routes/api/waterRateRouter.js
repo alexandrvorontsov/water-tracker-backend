@@ -10,13 +10,6 @@ const { joiWaterRateSchema } = require("../../models");
 
 const router = express.Router();
 
-// router.patch(
-//   "/",
-//   authenticate,
-//   validateBody(joiWaterRateSchema),
-//   ctrlWrapper(ctrl.updateWaterRateUser)
-// );
-
 router.patch(
   "/",
   authenticate,

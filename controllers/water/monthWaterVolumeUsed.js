@@ -3,9 +3,9 @@ const { calc, monthCalendar, newDay } = require("../../helpers");
 
 const updateWaterVolumeUsed = async (req, res) => {
   const { _id: owner, waterRate } = req.user;
-  const { date } = req.params;
+  const { monthNum } = req.params;
 
-  const dateString = date;
+  const dateString = monthNum;
   const dateObject = new Date(dateString);
   const monthNumber = dateObject.getMonth() + 1;
   const adjustMonth = parseInt(monthNumber) - 1;
