@@ -1,12 +1,15 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
+const emailRegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
 const userSchema = Schema(
   {
     email: {
       type: String,
       required: [true, "Email is required"],
       unique: true,
+      regExp: emailRegExp,
     },
     password: {
       type: String,
@@ -28,28 +31,25 @@ const userSchema = Schema(
       default: 2000,
       required: true,
     },
-
-    signin: Boolean,
     token: { type: String },
     avatarURL: { type: String },
-    lockedTokens: [{ token: String, dateLock: Date }],
   },
   { versionKey: false, timestamps: true }
 );
 
 const joiSignupSchema = Joi.object({
-  email: Joi.string().required(),
+  email: Joi.string().required().pattern(emailRegExp),
   password: Joi.string().min(8).max(64).required(),
 });
 
 const joiSigninSchema = Joi.object({
-  email: Joi.string().required(),
+  email: Joi.string().required().pattern(emailRegExp),
   password: Joi.string().min(8).max(64).required(),
 });
 
 const joiUserSchema = Joi.object({
-  name: Joi.string().max(32).required(),
-  email: Joi.string().email().required(),
+  name: Joi.string().max(32),
+  email: Joi.string().email().pattern(emailRegExp),
   gender: Joi.string().valid("male", "female"),
   oldPassword: Joi.string().min(8).max(64),
   newPassword: Joi.when("oldPassword", {

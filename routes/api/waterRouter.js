@@ -22,5 +22,3 @@ router.delete("/:id", authenticate, ctrlWrapper(ctrl.delWaterVolumeUsed));
 router.patch("/:id", authenticate, ctrlWrapper(ctrl.updateWaterVolumeUsed));
 
 module.exports = router;
-
-// todayWaterVolumeUsed;

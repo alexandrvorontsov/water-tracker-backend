@@ -1,7 +1,6 @@
 const { WaterInput } = require("../../models");
 const { calc } = require("../../helpers");
 
-// getToday
 const todayWaterVolumeUsed = async (req, res) => {
   const {
     user: { _id: owner, waterRate },

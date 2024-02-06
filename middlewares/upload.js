@@ -14,7 +14,6 @@ const storage = multer.diskStorage({
 const limits = {
   fileSize: 2097152,
 };
-// limits 2Mb
 
 const fileFilter = (req, file, cb) => {
   const allowedFormats = ["image/jpeg"];
