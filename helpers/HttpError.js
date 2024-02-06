@@ -7,7 +7,7 @@ const errorMessageList = {
 };
 
 const HttpError = (status, message) => {
-  const errorMessage = message || errorMessageList[status] || "Unknown Error";
+  const errorMessage = errorMessageList[status] || message || "Unknown Error";
   const error = new Error(errorMessage);
   error.status = status;
   return error;
