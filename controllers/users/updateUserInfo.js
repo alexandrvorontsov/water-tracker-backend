@@ -48,20 +48,16 @@ const updateUserInfo = async (req, res) => {
     user.gender = gender;
   }
 
-  const updUser = await User.findByIdAndUpdate(_id, {
-    new: true,
-  });
-
-  if (!updUser) {
+  if (!updatedUser) {
     throw HttpError(404, "User not found");
   }
 
   const response = {
     message: "User updated successfully",
     user: {
-      email: updUser.email,
-      name: updUser.name,
-      gender: updUser.gender,
+      email: updatedUser.email,
+      name: updatedUser.name,
+      gender: updatedUser.gender,
       avatarURL,
     },
   };
