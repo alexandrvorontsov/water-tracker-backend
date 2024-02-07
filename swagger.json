@@ -456,7 +456,7 @@
         }
       }
     },
-    "/water/today/{date}": {
+    "/water/today/": {
       "get": {
         "tags": ["Water"],
         "summary": "List of doses per day ",
