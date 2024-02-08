@@ -1,9 +1,9 @@
 const { WaterInput } = require("../../models");
-const { calc } = require("../../helpers");
+// const { calc } = require("../../helpers");
 
 const todayWaterVolumeUsed = async (req, res) => {
   const {
-    user: { _id: owner, waterRate },
+    user: { _id: owner },
   } = req;
 
   const currentDate = new Date();
@@ -20,9 +20,9 @@ const todayWaterVolumeUsed = async (req, res) => {
     owner,
   }).select("-createdAt -updatedAt");
 
-  const percentage = calc(dayPortions, waterRate);
+  // const percentage = calc(dayPortions, waterRate);
 
-  res.json({ dayPortions, percentage });
+  res.json(dayPortions);
 };
 
 module.exports = todayWaterVolumeUsed;
